@@ -86,13 +86,6 @@ namespace MerchantApi.Client
         }
 
         /// <summary>
-        /// Gets or sets the default API client for making HTTP calls.
-        /// </summary>
-        /// <value>The default API client.</value>
-        [Obsolete("ApiClient.Default is deprecated, please use 'Configuration.Default.ApiClient' instead.")]
-        public static ApiClient Default;
-
-        /// <summary>
         /// Gets or sets the Configuration.
         /// </summary>
         /// <value>An instance of the Configuration.</value>
