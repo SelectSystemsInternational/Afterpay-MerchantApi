@@ -23,6 +23,7 @@ Afterpay Merchant API Initial build
 Download Zip and Include Directories from MerchantApi in your Project
 
 using MerchantApi.Api;
+
 using MerchantApi.Model;
 
 <a name="documentation-for-api-endpoints"></a>
