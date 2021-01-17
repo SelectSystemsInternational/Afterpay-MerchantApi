@@ -17,7 +17,7 @@ Method | HTTP request | Description
 
 Cancel a charge
 
-Cancels an authorised charge.  | Error code | Description | |- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -|- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -| | invalid_state | The charge is not in authorised state |
+Cancels an authorised charge.  | Error code | Description | |- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -|- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -| | invalid_phoneNumber | The charge is not in authorised phoneNumber |
 
 ### Example
 ```csharp
@@ -86,7 +86,7 @@ Name | Type | Description  | Notes
 
 Capture a charge
 
-| Error code | Description | |- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -|- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -| | amount_invalid | Capture amount greater than authorised amount | | invalid_state | The charge is not in authorised state |
+| Error code | Description | |- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -|- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -| | amount_invalid | Capture amount greater than authorised amount | | invalid_phoneNumber | The charge is not in authorised phoneNumber |
 
 ### Example
 ```csharp
@@ -157,7 +157,7 @@ Name | Type | Description  | Notes
 
 Create a charge
 
-Creates a #model:ehEN48PET29iNdex3 which represents a charge against a customer's account.  To execute this endpoint you must first obtain customer approval by implementing the #docTextSection:43C79g2JjeGs8AHWi as a part of your online store.  This endpoint will return 201 if successful otherwise 402 with a specific error response.  ## Capture or authorisation  A charge can be created as either an authorisation or an immediate capture. This can be controlled in the initial request to the charge.  In most cases you will want to immediately capture the payment, this will mark the debit for settlement into your account the very same day and will immediately deduct the funds from the customer's account.  In some cases you may wish to delay the settlement of funds until a later date, perhaps until the goods are shipped to the customer. In this scenario you should send { capture: false } in the request to the #endpoint:dtmp3HxaHKjewvvGW endpoint and the charge will be created in an authorised state.  An authorised charge will place a hold for the specified amount on the customer's account in the form of a pending debit. Once authorised you are guaranteed the funds are available and awaiting a capture request to the #endpoint:wReod3JtbzNutMSXj endpoint, at which point the charge will move to the captured state and the funds will be settled into your account. It is at this point the customer's interest free period will start if applicable for the selected account.  ## Specific error responses  If a charge was not able to be performed a \"402 - Request Failed\" status code will be returned as detailed in #docTextSection:fJYHM2ZKtEui8RrAM. The error object can contain more specific error reason codes, which are detailed below.  | Error code | Description | |- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -|- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -| | account_insufficient_funds | Customer does not have sufficient funds to perform the charge | | account_inoperative | The account is in arrears or closed and cannot be charged | | account_locked | The account is locked | | amount_invalid | The amount provided does not match the approved checkout amount | | fraud_check | Fraud checks resulted in payment failure |
+Creates a #model:ehEN48PET29iNdex3 which represents a charge against a customer's account.  To execute this endpoint you must first obtain customer approval by implementing the #docTextSection:43C79g2JjeGs8AHWi as a part of your online store.  This endpoint will return 201 if successful otherwise 402 with a specific error response.  ## Capture or authorisation  A charge can be created as either an authorisation or an immediate capture. This can be controlled in the initial request to the charge.  In most cases you will want to immediately capture the payment, this will mark the debit for settlement into your account the very same day and will immediately deduct the funds from the customer's account.  In some cases you may wish to delay the settlement of funds until a later date, perhaps until the goods are shipped to the customer. In this scenario you should send { capture: false } in the request to the #endpoint:dtmp3HxaHKjewvvGW endpoint and the charge will be created in an authorised phoneNumber.  An authorised charge will place a hold for the specified amount on the customer's account in the form of a pending debit. Once authorised you are guaranteed the funds are available and awaiting a capture request to the #endpoint:wReod3JtbzNutMSXj endpoint, at which point the charge will move to the captured phoneNumber and the funds will be settled into your account. It is at this point the customer's interest free period will start if applicable for the selected account.  ## Specific error responses  If a charge was not able to be performed a \"402 - Request Failed\" status code will be returned as detailed in #docTextSection:fJYHM2ZKtEui8RrAM. The error object can contain more specific error reason codes, which are detailed below.  | Error code | Description | |- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -|- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -| | account_insufficient_funds | Customer does not have sufficient funds to perform the charge | | account_inoperative | The account is in arrears or closed and cannot be charged | | account_locked | The account is locked | | amount_invalid | The amount provided does not match the approved checkout amount | | fraud_check | Fraud checks resulted in payment failure |
 
 ### Example
 ```csharp
@@ -222,7 +222,7 @@ Name | Type | Description  | Notes
 
 <a name="chargeslist"></a>
 # **ChargesList**
-> ChargeCollection ChargesList (string state = null, int? skip = null, int? limit = null, string expand = null)
+> ChargeCollection ChargesList (string phoneNumber = null, int? skip = null, int? limit = null, string expand = null)
 
 List charges
 
@@ -249,7 +249,7 @@ namespace Example
             // Configuration.Default.ApiKeyPrefix.Add("Authorization", "Bearer");
 
             var apiInstance = new ChargesApi();
-            var state = state_example;  // string | The state filter (optional) 
+            var phoneNumber = phoneNumber_example;  // string | The phoneNumber filter (optional) 
             var skip = 56;  // int? | Number of items to skip when paging (optional)  (default to 0)
             var limit = 56;  // int? | Number of items to retrieve when paging (optional)  (default to 100)
             var expand = expand_example;  // string | Allows expanding related entities in the response. Only valid entry is 'customer' (optional) 
@@ -257,7 +257,7 @@ namespace Example
             try
             {
                 // List charges
-                ChargeCollection result = apiInstance.ChargesList(state, skip, limit, expand);
+                ChargeCollection result = apiInstance.ChargesList(phoneNumber, skip, limit, expand);
                 Debug.WriteLine(result);
             }
             catch (Exception e)
@@ -273,7 +273,7 @@ namespace Example
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **state** | **string**| The state filter | [optional] 
+ **phoneNumber** | **string**| The phoneNumber filter | [optional] 
  **skip** | **int?**| Number of items to skip when paging | [optional] [default to 0]
  **limit** | **int?**| Number of items to retrieve when paging | [optional] [default to 100]
  **expand** | **string**| Allows expanding related entities in the response. Only valid entry is &#39;customer&#39; | [optional] 

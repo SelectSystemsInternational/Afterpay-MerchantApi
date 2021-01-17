@@ -14,3 +14,11 @@ M:\Production\GitRepos\ZipNZMerchantApi\MerchantApi\obj\Debug\netstandard2.1\Mer
 M:\Production\GitRepos\ZipNZMerchantApi\MerchantApi\obj\Debug\netstandard2.1\MerchantApi.csproj.CoreCompileInputs.cache
 M:\Production\GitRepos\ZipNZMerchantApi\MerchantApi\obj\Debug\netstandard2.1\MerchantApi.dll
 M:\Production\GitRepos\ZipNZMerchantApi\MerchantApi\obj\Debug\netstandard2.1\MerchantApi.pdb
+M:\Production\GitRepos\AfterpayMerchantApi\MerchantApi\obj\Debug\netstandard2.1\MerchantApi.csproj.CoreCompileInputs.cache
+M:\Production\GitRepos\AfterpayMerchantApi\MerchantApi\obj\Debug\netstandard2.1\MerchantApi.AssemblyInfoInputs.cache
+M:\Production\GitRepos\AfterpayMerchantApi\MerchantApi\obj\Debug\netstandard2.1\MerchantApi.AssemblyInfo.cs
+M:\Production\GitRepos\AfterpayMerchantApi\MerchantApi\obj\Debug\netstandard2.1\MerchantApi.dll
+M:\Production\GitRepos\AfterpayMerchantApi\MerchantApi\obj\Debug\netstandard2.1\MerchantApi.pdb
+M:\Production\GitRepos\AfterpayMerchantApi\MerchantApi\bin\Debug\netstandard2.1\MerchantApi.deps.json
+M:\Production\GitRepos\AfterpayMerchantApi\MerchantApi\bin\Debug\netstandard2.1\MerchantApi.dll
+M:\Production\GitRepos\AfterpayMerchantApi\MerchantApi\bin\Debug\netstandard2.1\MerchantApi.pdb

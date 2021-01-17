@@ -1,7 +1,7 @@
 /* 
  * Merchant API
  *
- * ZipMoney Merchant API Initial build
+ * Afterpay Merchant API Initial build
  *
  * OpenAPI spec version: 2017-03-01
  * 

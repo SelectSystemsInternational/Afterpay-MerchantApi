@@ -1,7 +1,7 @@
 /* 
  * Merchant API
  *
- * ZipMoney Merchant API Initial build
+ * Afterpay Merchant API Initial build
  *
  * OpenAPI spec version: 2017-03-01
  * 
@@ -9,6 +9,7 @@
  */
 
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using MerchantApi.Api;
 using MerchantApi.Model;
@@ -16,27 +17,32 @@ using MerchantApi.Model;
 namespace MerchantApi.Example
 {
     /// <summary>
-    ///  Class for testing OrdersApi
+    ///  Class for testing Api
 
     public class ApiExample
     {
         AuthorizationApi authorizationApi;
-        OrdersApi ordersApi;
+        CheckoutsApi checkoutsApi;
+        PaymentsApi paymentsApi;
 
         public void main()
-        { 
+        {
             // Configure API key authorization, get an Access Token, Create an Order, Get an Order
 
             try
             {
-                // Setup Authorization
-                authorizationApi = new AuthorizationApi("https://merchant-auth-nz.sandbox.zip.co");
-                authorizationApi.Configuration.ClientId = "Your Client Id";
-                authorizationApi.Configuration.ClientSecret = "Your Client Secret";
+                authorizationApi = new AuthorizationApi("https://api-sandbox.afterpay.com/v2/");
+                authorizationApi.Configuration.MerchantId = "41819";
+                authorizationApi.Configuration.MerchantSecretKey = "97e7abb094337049f15b5daf1b273e56d09e8cbf9a2d21f50c28092de5590b3534a90448fc5dd8e633a906c6f7d55b86dedcbd69e7e1fe1029dc44385bfe696e";
+                authorizationApi.Configuration.UserAgent = "Afterpay SDK; .netCore3.1; Git Example";
 
                 // Create Acces Token
-                var authorization = authorizationApi.AuthorizationCreateToken();
-                Debug.WriteLine(authorization);
+                var authentication = authorizationApi.AuthorizationCreateToken();
+
+                checkoutsApi = new CheckoutsApi(authorizationApi.Configuration);
+                paymentsApi = new PaymentsApi(authorizationApi.Configuration);
+
+                Debug.WriteLine(authentication);
             }
             catch (Exception e)
             {
@@ -45,24 +51,90 @@ namespace MerchantApi.Example
 	        
             try
             {
-                // Create Order
-		        ordersApi = new OrdersApi("https://sandbox.zip.co/nz/api");
-                var createOrderRequest = CreateRequest(CreateOrderRequest.PaymentFlowEnum.Payment);
+                // Create Checkout
+                var createCheckoutRequest = CreateCheckoutRequest();
+
+                var response = checkoutsApi.CheckoutsCreate(createCheckoutRequest);
+
+                var checkout = checkoutsApi.CheckoutsGet(response.Token);
+
+                string orderToken = null;
+
                 var authorization = authorizationApi.AuthorizationCreateToken();
 
-                // Create Order
-                var createOrderResponse = ordersApi.OrderCreate(authorization, "Idempotency-Key", createOrderRequest);
-                Debug.WriteLine(createOrderResponse);
-		
-		        // Get Order
-		        var id = createOrderResponse.OrderId;
-                var order = ordersApi.OrderGet(id);
-                Debug.WriteLine(order);
+                orderToken = "OrderToken";
+
+                var auth = new Auth("1", orderToken, "Auth for Order");
+
+                var authResponse = paymentsApi.PaymentAuth(auth);
+
+                var amount = new Money("0.00", "NZD");
+
+                var capture = new Capture("1", "1", amount, "Capture for Order"); // Request Id needs to increas for each partial refund
+
+                var id = "OrderId";
+
+                var captureResponse = paymentsApi.PaymentCapture(id, capture);
+
             }
             catch (Exception e)
             {
                 Debug.Print("Exception when calling OrdersApi: " + e.Message);
             }
+        }
+
+        /// <summary>
+        /// Create a Test Checkout Request
+        /// </summary>
+        public OrderDetails CreateCheckoutRequest()
+        {
+            var phoneNumber = "0200000000";
+
+            var amount = new Money("37.37", "NZD");
+            var consumer = new Consumer(phoneNumber, "Given Name", "Surname", "youremail@yourwebsite.com");
+
+            var billing = new Contact("Address Name", "AddressLine1", "AddressLine2", "Area 1", "Area 2", "Region", "9999", "CC", phoneNumber);
+            var shipping = new Contact("Address Name", "AddressLine1", "AddressLine2", "Area 1", "Area 2", "Region", "9999", "CC", phoneNumber);
+
+            var courier = new ShippingCourier("2021-01-01T12:00:00", "Courier Name", "Tracking Number", ShippingCourier.PriorityEnum.Standard.ToString());
+
+            var amount1 = new Money("17.17", "NZD");
+            var amount2 = new Money("20.20", "NZD");
+
+
+            string[][] categories1 = { new string[] { "Sporting Goods1", "Climbing Equipment1", "Climbing1" }, new string[] { "Sale1", "Climbing1" } };
+            string[][] categories2 = { new string[] { "Sporting Goods2", "Climbing Equipment2", "Climbing2" }, new string[] { "Sale2", "Climbing2" } };
+
+            var item1 = new Item("Item1", "SKU1", 1, "https://www.selectsystems.com.au/afterpay-payment-plugin", "https://www.selectsystems.com.au/afterpay-payment-plugin.image.jpg", amount1, categories1);
+            var item2 = new Item("Item2", "SKU2", 2, "https://www.selectsystems.com.au/afterpay-payment-plugin", "https://www.selectsystems.com.au/afterpay-payment-plugin.image.jpg", amount2, categories2);
+
+            var items = new List<Item>();
+            items.Add(item1);
+            items.Add(item2);
+
+            var discountAmount1 = new Money("1.00", "NZD");
+            var discountAmount2 = new Money("2.00", "NZD");
+
+            var discount1 = new Discount("Discount1", discountAmount1);
+            var discount2 = new Discount("Discount1", discountAmount1);
+
+            var discounts = new List<Discount>();
+            discounts.Add(discount1);
+            discounts.Add(discount2);
+
+            string RedirectConfirmUrl = "https://orders.yourwebsite.com/confirm";
+            string RedirectCancelUrl = "https://orders.yourwebsite.com/cancel";
+
+            var merchant = new Merchant(RedirectConfirmUrl, RedirectCancelUrl);
+
+            var merchantReference = "Reference1";
+
+            var taxAmount = new Money("5.00", "NZD");
+            var shippingAmount = new Money("7.00", "NZD");
+
+            var createCheckoutRequest = new OrderDetails(amount, consumer, billing, shipping, courier, items, discounts, merchant, merchantReference, taxAmount, shippingAmount);
+
+            return createCheckoutRequest;
         }
     }
 }

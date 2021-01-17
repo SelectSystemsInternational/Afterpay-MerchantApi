@@ -5,8 +5,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Line1** | **string** | The first line in the address | 
 **Line2** | **string** | The (optional) second address line | [optional] 
-**City** | **string** | The address city | 
-**State** | **string** | The state or province | 
+**Region** | **string** | The address region | 
+**PhoneNumber** | **string** | The phoneNumber or province | 
 **PostalCode** | **string** | The post or zip code | 
 **Country** | **string** | The ISO-3166 country code. See https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2. | 
 **FirstName** | **string** | The recipient&#39;s first name | [optional] 

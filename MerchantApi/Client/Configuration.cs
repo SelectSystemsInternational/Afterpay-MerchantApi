@@ -1,7 +1,7 @@
 /* 
  * Merchant API
  *
- * ZipMoney Merchant API Initial build
+ * Afterpay Merchant API Initial build
  *
  * OpenAPI spec version: 2017-03-01
  * 
@@ -29,8 +29,8 @@ namespace MerchantApi.Client
         /// </summary>
         /// <param name="apiClient">Api client</param>
         /// <param name="defaultHeader">Dictionary of default HTTP header</param>
-        /// <param name="clientId">ClientId</param>
-        /// <param name="clientSecret">ClientSecret</param>
+        /// <param name="MerchantId">MerchantId</param>
+        /// <param name="MerchantSecretKey">MerchantSecretKey</param>
         /// <param name="accessToken">accessToken</param>
         /// <param name="apiToken">Dictionary of API key</param>
         /// <param name="apiKeyPrefix">Dictionary of API key prefix</param>
@@ -40,9 +40,9 @@ namespace MerchantApi.Client
         /// <param name="userAgent">HTTP user agent</param>
         public Configuration(ApiClient apiClient = null,
                              Dictionary<String, String> defaultHeader = null,
-                             string clientId = null,
-                             string clientSecret = null,
-                             AccessToken accessToken = null,
+                             string MerchantId = null,
+                             string MerchantSecretKey = null,
+                             String accessToken = null,
                              Dictionary<String, String> apiKey = null,
                              Dictionary<String, String> apiKeyPrefix = null,
                              string tempFolderPath = null,
@@ -53,8 +53,8 @@ namespace MerchantApi.Client
         {
             setApiClientUsingDefault(apiClient);
 
-            ClientId = clientId;
-            ClientSecret = clientSecret;
+            MerchantId = MerchantId;
+            MerchantSecretKey = MerchantSecretKey;
             AccessToken = accessToken;
             UserAgent = userAgent;
             Timeout = timeout;
@@ -201,22 +201,22 @@ namespace MerchantApi.Client
         public String UserAgent { get; set; }
 
         /// <summary>
-        /// Gets or sets the ClientId (HTTP basic authentication).
+        /// Gets or sets the MerchantId (HTTP basic authentication).
         /// </summary>
-        /// <value>The ClientId.</value>
-        public String ClientId { get; set; }
+        /// <value>The MerchantId.</value>
+        public String MerchantId { get; set; }
 
         /// <summary>
-        /// Gets or sets the clientSecret (HTTP basic authentication).
+        /// Gets or sets the MerchantSecretKey (HTTP basic authentication).
         /// </summary>
-        /// <value>The clientSecret.</value>
-        public String ClientSecret { get; set; }
+        /// <value>The MerchantSecretKey.</value>
+        public String MerchantSecretKey { get; set; }
 
         /// <summary>
         /// Gets or sets the access token for OAuth2 authentication.
         /// </summary>
         /// <value>The access token.</value>
-        public AccessToken AccessToken { get; set; }
+        public String AccessToken { get; set; }
 
         /// <summary>
         /// Gets or sets the API key based on the authentication name.

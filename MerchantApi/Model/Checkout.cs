@@ -1,7 +1,7 @@
 /* 
  * Merchant API
  *
- * ZipMoney Merchant API Initial build
+ * Afterpay Merchant API Initial build
  *
  * OpenAPI spec version: 2017-03-01
  * 
@@ -24,83 +24,11 @@ using System.ComponentModel.DataAnnotations;
 namespace MerchantApi.Model
 {
     /// <summary>
-    /// The checkout request
+    /// The Checkout object
     /// </summary>
     [DataContract]
-    public partial class Checkout :  IEquatable<Checkout>, IValidatableObject
+    public partial class Checkout:  IEquatable<Checkout>, IValidatableObject
     {
-        /// <summary>
-        /// The type of checkout
-        /// </summary>
-        /// <value>The type of checkout</value>
-        [JsonConverter(typeof(StringEnumConverter))]
-        public enum TypeEnum
-        {
-            
-            /// <summary>
-            /// Enum Standard for "standard"
-            /// </summary>
-            [EnumMember(Value = "standard")]
-            Standard,
-            
-            /// <summary>
-            /// Enum Express for "express"
-            /// </summary>
-            [EnumMember(Value = "express")]
-            Express
-        }
-
-        /// <summary>
-        /// Current state of the checkout
-        /// </summary>
-        /// <value>Current state of the checkout</value>
-        [JsonConverter(typeof(StringEnumConverter))]
-        public enum StateEnum
-        {
-            
-            /// <summary>
-            /// Enum Created for "created"
-            /// </summary>
-            [EnumMember(Value = "created")]
-            Created,
-            
-            /// <summary>
-            /// Enum Expired for "expired"
-            /// </summary>
-            [EnumMember(Value = "expired")]
-            Expired,
-            
-            /// <summary>
-            /// Enum Approved for "approved"
-            /// </summary>
-            [EnumMember(Value = "approved")]
-            Approved,
-            
-            /// <summary>
-            /// Enum Completed for "completed"
-            /// </summary>
-            [EnumMember(Value = "completed")]
-            Completed,
-            
-            /// <summary>
-            /// Enum Cancelled for "cancelled"
-            /// </summary>
-            [EnumMember(Value = "cancelled")]
-            Cancelled
-        }
-
-        /// <summary>
-        /// The type of checkout
-        /// </summary>
-        /// <value>The type of checkout</value>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        public TypeEnum? Type { get; set; }
-        /// <summary>
-        /// Current state of the checkout
-        /// </summary>
-        /// <value>Current state of the checkout</value>
-        [DataMember(Name="state", EmitDefaultValue=false)]
-        public StateEnum? State { get; set; }
         /// <summary>
         /// Initializes a new instance of the <see cref="Checkout" /> class.
         /// </summary>
@@ -109,122 +37,34 @@ namespace MerchantApi.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="Checkout" /> class.
         /// </summary>
-        /// <param name="Id">The checkout id (required).</param>
-        /// <param name="Uri">The uri to redirect the user to in order to approve this checkout. (required).</param>
-        /// <param name="Type">The type of checkout (default to TypeEnum.Standard).</param>
-        /// <param name="Shopper">Shopper.</param>
-        /// <param name="Order">Order.</param>
-        /// <param name="Features">Features.</param>
-        /// <param name="Config">Config.</param>
-        /// <param name="Created">Date the checkout was created (required).</param>
-        /// <param name="State">Current state of the checkout (required).</param>
-        /// <param name="CustomerId">The id of the customer who has approved this checkout request. Only present if approved..</param>
-        /// <param name="Metadata">Metadata.</param>
-        public Checkout(string Id = default(string), string Uri = default(string), TypeEnum? Type = TypeEnum.Standard, Shopper Shopper = default(Shopper), CheckoutOrder Order = default(CheckoutOrder), CheckoutFeatures Features = default(CheckoutFeatures), CheckoutConfiguration Config = default(CheckoutConfiguration), DateTime? Created = default(DateTime?), StateEnum? State = default(StateEnum?), string CustomerId = default(string), Metadata Metadata = default(Metadata))
+        /// <param name="Token">	Checkout token to be used to complete payment. (required).</param>
+        /// <param name="Expires">The UTC timestamp of when the checkout token will expire. (required).</param>
+        /// <param name="RedirectCheckoutUrl">A URL that can be used to redirect the consumer to the Afterpay screenflow. (required).</param> 
+        public Checkout(string Token = default(string), string Expires = default(string), string RedirectCheckoutUrl = default(string))
         {
-            // to ensure "Id" is required (not null)
-            if (Id == null)
-            {
-                throw new InvalidDataException("Id is a required property for Checkout and cannot be null");
-            }
-            else
-            {
-                this.Id = Id;
-            }
-            // to ensure "Uri" is required (not null)
-            if (Uri == null)
-            {
-                throw new InvalidDataException("Uri is a required property for Checkout and cannot be null");
-            }
-            else
-            {
-                this.Uri = Uri;
-            }
-            // to ensure "Created" is required (not null)
-            if (Created == null)
-            {
-                throw new InvalidDataException("Created is a required property for Checkout and cannot be null");
-            }
-            else
-            {
-                this.Created = Created;
-            }
-            // to ensure "State" is required (not null)
-            if (State == null)
-            {
-                throw new InvalidDataException("State is a required property for Checkout and cannot be null");
-            }
-            else
-            {
-                this.State = State;
-            }
-            // use default value if no "Type" provided
-            if (Type == null)
-            {
-                this.Type = TypeEnum.Standard;
-            }
-            else
-            {
-                this.Type = Type;
-            }
-            this.Shopper = Shopper;
-            this.Order = Order;
-            this.Features = Features;
-            this.Config = Config;
-            this.CustomerId = CustomerId;
-            this.Metadata = Metadata;
+            this.Token = Token;
+            this.Expires = Expires;
+            this.RedirectCheckoutUrl = RedirectCheckoutUrl;
         }
-        
         /// <summary>
-        /// The checkout id
+        /// The Checkout token to be used to complete payment.
         /// </summary>
         /// <value>The checkout id</value>
-        [DataMember(Name="id", EmitDefaultValue=false)]
-        public string Id { get; set; }
+        [DataMember(Name = "token", EmitDefaultValue = false)]
+        public string Token { get; set; }
         /// <summary>
-        /// The uri to redirect the user to in order to approve this checkout.
+        /// The UTC timestamp of when the checkout token will expire, in ISO 8601 format.
         /// </summary>
-        /// <value>The uri to redirect the user to in order to approve this checkout.</value>
-        [DataMember(Name="uri", EmitDefaultValue=false)]
-        public string Uri { get; set; }
+        /// <value>The checkout id</value>
+        [DataMember(Name = "expires", EmitDefaultValue = false)]
+        public string Expires { get; set; }
         /// <summary>
-        /// Gets or Sets Shopper
+        /// A URL that can be used to redirect the consumer to the Afterpay screenflow.
         /// </summary>
-        [DataMember(Name="shopper", EmitDefaultValue=false)]
-        public Shopper Shopper { get; set; }
-        /// <summary>
-        /// Gets or Sets Order
-        /// </summary>
-        [DataMember(Name="order", EmitDefaultValue=false)]
-        public CheckoutOrder Order { get; set; }
-        /// <summary>
-        /// Gets or Sets Features
-        /// </summary>
-        [DataMember(Name="features", EmitDefaultValue=false)]
-        public CheckoutFeatures Features { get; set; }
-        /// <summary>
-        /// Gets or Sets Config
-        /// </summary>
-        [DataMember(Name="config", EmitDefaultValue=false)]
-        public CheckoutConfiguration Config { get; set; }
-        /// <summary>
-        /// Date the checkout was created
-        /// </summary>
-        /// <value>Date the checkout was created</value>
-        [DataMember(Name="created", EmitDefaultValue=false)]
-        public DateTime? Created { get; set; }
-        /// <summary>
-        /// The id of the customer who has approved this checkout request. Only present if approved.
-        /// </summary>
-        /// <value>The id of the customer who has approved this checkout request. Only present if approved.</value>
-        [DataMember(Name="customer_id", EmitDefaultValue=false)]
-        public string CustomerId { get; set; }
-        /// <summary>
-        /// Gets or Sets Metadata
-        /// </summary>
-        [DataMember(Name="metadata", EmitDefaultValue=false)]
-        public Metadata Metadata { get; set; }
-        /// <summary>
+        /// <value>The Redirect Checkout Url</value>
+        [DataMember(Name = "redirectCheckoutUrl", EmitDefaultValue = false)]
+        public string RedirectCheckoutUrl { get; set; }
+          /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -232,17 +72,9 @@ namespace MerchantApi.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Checkout {\n");
-            sb.Append("  Id: ").Append(Id).Append("\n");
-            sb.Append("  Uri: ").Append(Uri).Append("\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
-            sb.Append("  Shopper: ").Append(Shopper).Append("\n");
-            sb.Append("  Order: ").Append(Order).Append("\n");
-            sb.Append("  Features: ").Append(Features).Append("\n");
-            sb.Append("  Config: ").Append(Config).Append("\n");
-            sb.Append("  Created: ").Append(Created).Append("\n");
-            sb.Append("  State: ").Append(State).Append("\n");
-            sb.Append("  CustomerId: ").Append(CustomerId).Append("\n");
-            sb.Append("  Metadata: ").Append(Metadata).Append("\n");
+            sb.Append("  Token: ").Append(Token).Append("\n");
+            sb.Append("  Expires: ").Append(Expires).Append("\n");
+            sb.Append("  RedirectCheckoutUrl: ").Append(RedirectCheckoutUrl).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -280,59 +112,19 @@ namespace MerchantApi.Model
 
             return 
                 (
-                    this.Id == other.Id ||
-                    this.Id != null &&
-                    this.Id.Equals(other.Id)
+                    this.Token == other.Token ||
+                    this.Token != null &&
+                    this.Token.Equals(other.Token)
                 ) && 
                 (
-                    this.Uri == other.Uri ||
-                    this.Uri != null &&
-                    this.Uri.Equals(other.Uri)
+                    this.Expires == other.Expires ||
+                    this.Expires != null &&
+                    this.Expires.Equals(other.Expires)
                 ) && 
                 (
-                    this.Type == other.Type ||
-                    this.Type != null &&
-                    this.Type.Equals(other.Type)
-                ) && 
-                (
-                    this.Shopper == other.Shopper ||
-                    this.Shopper != null &&
-                    this.Shopper.Equals(other.Shopper)
-                ) && 
-                (
-                    this.Order == other.Order ||
-                    this.Order != null &&
-                    this.Order.Equals(other.Order)
-                ) && 
-                (
-                    this.Features == other.Features ||
-                    this.Features != null &&
-                    this.Features.Equals(other.Features)
-                ) && 
-                (
-                    this.Config == other.Config ||
-                    this.Config != null &&
-                    this.Config.Equals(other.Config)
-                ) && 
-                (
-                    this.Created == other.Created ||
-                    this.Created != null &&
-                    this.Created.Equals(other.Created)
-                ) && 
-                (
-                    this.State == other.State ||
-                    this.State != null &&
-                    this.State.Equals(other.State)
-                ) && 
-                (
-                    this.CustomerId == other.CustomerId ||
-                    this.CustomerId != null &&
-                    this.CustomerId.Equals(other.CustomerId)
-                ) && 
-                (
-                    this.Metadata == other.Metadata ||
-                    this.Metadata != null &&
-                    this.Metadata.Equals(other.Metadata)
+                    this.RedirectCheckoutUrl == other.RedirectCheckoutUrl ||
+                    this.RedirectCheckoutUrl != null &&
+                    this.RedirectCheckoutUrl.Equals(other.RedirectCheckoutUrl)
                 );
         }
 
@@ -347,28 +139,12 @@ namespace MerchantApi.Model
             {
                 int hash = 41;
                 // Suitable nullity checks etc, of course :)
-                if (this.Id != null)
-                    hash = hash * 59 + this.Id.GetHashCode();
-                if (this.Uri != null)
-                    hash = hash * 59 + this.Uri.GetHashCode();
-                if (this.Type != null)
-                    hash = hash * 59 + this.Type.GetHashCode();
-                if (this.Shopper != null)
-                    hash = hash * 59 + this.Shopper.GetHashCode();
-                if (this.Order != null)
-                    hash = hash * 59 + this.Order.GetHashCode();
-                if (this.Features != null)
-                    hash = hash * 59 + this.Features.GetHashCode();
-                if (this.Config != null)
-                    hash = hash * 59 + this.Config.GetHashCode();
-                if (this.Created != null)
-                    hash = hash * 59 + this.Created.GetHashCode();
-                if (this.State != null)
-                    hash = hash * 59 + this.State.GetHashCode();
-                if (this.CustomerId != null)
-                    hash = hash * 59 + this.CustomerId.GetHashCode();
-                if (this.Metadata != null)
-                    hash = hash * 59 + this.Metadata.GetHashCode();
+                if (this.Token != null)
+                    hash = hash * 59 + this.Token.GetHashCode();
+                if (this.Expires != null)
+                    hash = hash * 59 + this.Expires.GetHashCode();
+                if (this.RedirectCheckoutUrl != null)
+                    hash = hash * 59 + this.RedirectCheckoutUrl.GetHashCode();
                 return hash;
             }
         }

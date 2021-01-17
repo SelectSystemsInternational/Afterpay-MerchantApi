@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **Features** | [**CheckoutFeatures**](CheckoutFeatures.md) |  | [optional] 
 **Config** | [**CheckoutConfiguration**](CheckoutConfiguration.md) |  | [optional] 
 **Created** | **DateTime?** | Date the checkout was created | 
-**State** | **string** | Current state of the checkout | 
+**PhoneNumber** | **string** | Current phoneNumber of the checkout | 
 **CustomerId** | **string** | The id of the customer who has approved this checkout request. Only present if approved. | [optional] 
 **Metadata** | [**Metadata**](Metadata.md) |  | [optional] 
 

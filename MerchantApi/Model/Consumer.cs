@@ -1,7 +1,7 @@
 /* 
  * Merchant API
  *
- * ZipMoney Merchant API Initial build
+ * Afterpay Merchant API Initial build
  *
  * OpenAPI spec version: 2017-03-01
  * 
@@ -24,7 +24,7 @@ using System.ComponentModel.DataAnnotations;
 namespace MerchantApi.Model
 {
     /// <summary>
-    /// Consumer
+    /// The Consumer object
     /// </summary>
     [DataContract]
     public partial class Consumer :  IEquatable<Consumer>, IValidatableObject
@@ -38,41 +38,25 @@ namespace MerchantApi.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="Consumer" /> class.
         /// </summary>
-        /// <param name="Number">PhoneNumber</param>
-        /// <param name="GivenNames">first names (required).</param>
-        /// <param name="Surname">Surname (required).</param>
-        /// <param name="Email">Consumer&#39;s email (required).</param>
-        public Consumer(PhoneNumber Number = default(PhoneNumber), string GivenNames = default(string), string Surname = default(string), string Email = default(string))
+        /// <param name="PhoneNumber">The consumer’s phone number</param>
+        /// <param name="GivenNames">The consumer’s first name.</param>
+        /// <param name="Surname">The consumer’s last name.</param>
+        /// <param name="Email">The consumer’s email address (required).</param>
+        public Consumer(string PhoneNumber = default(string), string GivenNames = default(string), string Surname = default(string), string Email = default(string))
         {
-            // to ensure "GivenNames" is required (not null)
-            if (GivenNames == null)
-            {
-                throw new InvalidDataException("GivenNames is a required property for Consumer and cannot be null");
-            }
-            else
-            {
-                this.GivenNames = GivenNames;
-            }
-            // to ensure "LastName" is required (not null)
-            if (Surname == null)
-            {
-                throw new InvalidDataException("Surname is a required property for Consumer and cannot be null");
-            }
-            else
-            {
-                this.Surname = Surname;
-            }
             // to ensure "Email" is required (not null)
             if (Email == null)
             {
-                throw new InvalidDataException("Email is a required property for Consumer and cannot be null");
+                throw new InvalidDataException("Email is a required property for OrderConsumer and cannot be null");
             }
             else
             {
                 this.Email = Email;
             }
 
-            this.Number = Number;
+            this.PhoneNumber = PhoneNumber;
+            this.GivenNames = GivenNames;
+            this.Surname = Surname;
         }
         
         /// <summary>
@@ -80,7 +64,7 @@ namespace MerchantApi.Model
         /// </summary>
         /// <value>Consumer&#39;s title</value>
         [DataMember(Name= "phoneNumber", EmitDefaultValue=false)]
-        public PhoneNumber Number { get; set; }
+        public string PhoneNumber { get; set; }
         /// <summary>
         /// Consumer&#39;s first name
         /// </summary>
@@ -99,6 +83,7 @@ namespace MerchantApi.Model
         /// <value>Consumer&#39;s email</value>
         [DataMember(Name="email", EmitDefaultValue=false)]
         public string Email { get; set; }
+
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
@@ -107,7 +92,7 @@ namespace MerchantApi.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Consumer {\n");
-            sb.Append("  Number: ").Append(Number).Append("\n");
+            sb.Append("  Number: ").Append(PhoneNumber).Append("\n");
             sb.Append("  GivenNames: ").Append(GivenNames).Append("\n");
             sb.Append("  Surname: ").Append(Surname).Append("\n");
             sb.Append("  Email: ").Append(Email).Append("\n");
@@ -148,8 +133,8 @@ namespace MerchantApi.Model
 
             return 
                 (
-                    this.Number == other.Number ||
-                    this.Number.Equals(other.Number)
+                    this.PhoneNumber == other.PhoneNumber ||
+                    this.PhoneNumber.Equals(other.PhoneNumber)
                 ) && 
                 (
                     this.GivenNames == other.GivenNames ||
@@ -179,8 +164,8 @@ namespace MerchantApi.Model
             {
                 int hash = 41;
                 // Suitable nullity checks etc, of course :)
-                if (this.Number != null)
-                    hash = hash * 59 + this.Number.GetHashCode();
+                if (this.PhoneNumber != null)
+                    hash = hash * 59 + this.PhoneNumber.GetHashCode();
                 if (this.GivenNames != null)
                     hash = hash * 59 + this.GivenNames.GetHashCode();
                 if (this.Surname != null)

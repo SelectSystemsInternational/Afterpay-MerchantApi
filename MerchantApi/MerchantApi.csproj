@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
-    <Description>zipMoney MerchantApi C#</Description>
+    <Description>Afterpay MerchantApi C#</Description>
     <Version>2.1.0.1</Version>
     <PackageProjectUrl>https://github.com/users/SelectSystemsInternational/projects/19</PackageProjectUrl>
     <RepositoryUrl>https://github.com/SelectSystemsInternational/ZipNZMerchantApi</RepositoryUrl>
@@ -11,10 +11,40 @@
 
   <ItemGroup>
     <Compile Remove="Api\ChargesApi.cs" />
+    <Compile Remove="Api\CustomersApi.cs" />
+    <Compile Remove="Api\RefundsApi.cs" />
     <Compile Remove="Api\SettlementsApi.cs" />
     <Compile Remove="Api\TokensApi.cs" />
     <Compile Remove="Model\Settlement.cs" />
     <Compile Remove="Model\SettlementTransactions.cs" />
+    <Compile Remove="Model\ToDo\Charge.cs" />
+    <Compile Remove="Model\ToDo\ChargeCollection.cs" />
+    <Compile Remove="Model\ToDo\ChargeOrder.cs" />
+    <Compile Remove="Model\ToDo\CheckoutConfiguration.cs" />
+    <Compile Remove="Model\ToDo\CheckoutFeatures.cs" />
+    <Compile Remove="Model\ToDo\CheckoutFeaturesTokenisation.cs" />
+    <Compile Remove="Model\ToDo\CheckoutOrder.cs" />
+    <Compile Remove="Model\ToDo\CreateCaptureRequest.cs" />
+    <Compile Remove="Model\ToDo\CreateChargeRequest.cs" />
+    <Compile Remove="Model\ToDo\CreateCheckoutRequest.cs" />
+    <Compile Remove="Model\ToDo\CreateCheckoutRequestFeatures.cs" />
+    <Compile Remove="Model\ToDo\CreateCheckoutRequestFeaturesTokenisation.cs" />
+    <Compile Remove="Model\ToDo\CreateOrderRequest.cs" />
+    <Compile Remove="Model\ToDo\CreateTokenRequest.cs" />
+    <Compile Remove="Model\ToDo\Customer.cs" />
+    <Compile Remove="Model\ToDo\Metadata.cs" />
+    <Compile Remove="Model\ToDo\OrderConsumer.cs" />
+    <Compile Remove="Model\ToDo\OrderCreateResponse.cs" />
+    <Compile Remove="Model\ToDo\OrderItemAdditionalDetails.cs" />
+    <Compile Remove="Model\ToDo\OrderShipping.cs" />
+    <Compile Remove="Model\ToDo\OrderShippingTracking.cs" />
+    <Compile Remove="Model\ToDo\Pairing.cs" />
+    <Compile Remove="Model\ToDo\PhoneNumber.cs" />
+    <Compile Remove="Model\ToDo\Promotions.cs" />
+    <Compile Remove="Model\ToDo\Settlement.cs" />
+    <Compile Remove="Model\ToDo\SettlementTransactions.cs" />
+    <Compile Remove="Model\ToDo\Shopper.cs" />
+    <Compile Remove="Model\ToDo\ShopperStatistics.cs" />
   </ItemGroup>
 
   <ItemGroup>

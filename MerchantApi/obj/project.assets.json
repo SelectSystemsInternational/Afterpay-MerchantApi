@@ -263,11 +263,11 @@
   "project": {
     "version": "2.1.0.1",
     "restore": {
-      "projectUniqueName": "M:\\Production\\GitRepos\\ZipNZMerchantApi\\MerchantApi\\MerchantApi.csproj",
+      "projectUniqueName": "M:\\Production\\GitRepos\\AfterpayMerchantApi\\MerchantApi\\MerchantApi.csproj",
       "projectName": "MerchantApi",
-      "projectPath": "M:\\Production\\GitRepos\\ZipNZMerchantApi\\MerchantApi\\MerchantApi.csproj",
+      "projectPath": "M:\\Production\\GitRepos\\AfterpayMerchantApi\\MerchantApi\\MerchantApi.csproj",
       "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
-      "outputPath": "M:\\Production\\GitRepos\\ZipNZMerchantApi\\MerchantApi\\obj\\",
+      "outputPath": "M:\\Production\\GitRepos\\AfterpayMerchantApi\\MerchantApi\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -285,6 +285,7 @@
       },
       "frameworks": {
         "netstandard2.1": {
+          "targetAlias": "netstandard2.1",
           "projectReferences": {}
         }
       },
@@ -296,6 +297,7 @@
     },
     "frameworks": {
       "netstandard2.1": {
+        "targetAlias": "netstandard2.1",
         "dependencies": {
           "Microsoft.CSharp": {
             "target": "Package",
@@ -329,7 +331,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.102\\RuntimeIdentifierGraph.json"
       }
     }
   }

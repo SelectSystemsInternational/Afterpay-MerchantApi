@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "sovdRFYewulIjc9pNjTGWZ6Yj2gFTMQRvYbQTdvYa3xUIAlwfw1GuJd/Sx0VyKyd6Tt+yAyT6dZ1jA7JNoeYQg==",
+  "dgSpecHash": "zYNZl1icUe+6zWgiiq/ezWKnTOCuXvR5udrNB7yklWWd+jBM3EAJjGIT657ksmTx9Ogjhv1b4xwsV2CS7+nzLQ==",
   "success": true,
-  "projectFilePath": "M:\\Production\\GitRepos\\ZipNZMerchantApi\\MerchantApiTest\\MerchantApiTest.csproj",
+  "projectFilePath": "M:\\Production\\GitRepos\\AfterpayMerchantApi\\MerchantApiTest\\MerchantApiTest.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\user\\.nuget\\packages\\microsoft.codecoverage\\16.5.0\\microsoft.codecoverage.16.5.0.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",

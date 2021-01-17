@@ -1,7 +1,10 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\MerchantApi",
+    "\\MerchantApi\\Model",
+    "\\MerchantApi\\Model\\ToDo"
   ],
-  "SelectedNode": "\\MerchantApi.sln",
+  "SelectedNode": "\\MerchantApi",
   "PreviewInSolutionExplorer": false
 }

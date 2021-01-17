@@ -8,9 +8,42 @@
 
   <ItemGroup>
     <Compile Remove="Api\ChargesApiTests.cs" />
-    <Compile Remove="Api\GitExample.cs" />
+    <Compile Remove="Api\CustomersApiTests.cs" />
+    <Compile Remove="Api\OrdersApiTests.cs" />
+    <Compile Remove="Api\RefundsApiTests.cs" />
     <Compile Remove="Api\SettlementsApiTests.cs" />
     <Compile Remove="Api\TokensApiTests.cs" />
+    <Compile Remove="Model\AddressTests.cs" />
+    <Compile Remove="Model\CaptureChargeRequestTests.cs" />
+    <Compile Remove="Model\ChargeCollectionTests.cs" />
+    <Compile Remove="Model\ChargeOrderTests.cs" />
+    <Compile Remove="Model\ChargeTests.cs" />
+    <Compile Remove="Model\CheckoutConfigurationTests.cs" />
+    <Compile Remove="Model\CheckoutFeaturesTests.cs" />
+    <Compile Remove="Model\CheckoutFeaturesTokenisationTests.cs" />
+    <Compile Remove="Model\CheckoutOrderTests.cs" />
+    <Compile Remove="Model\CreateChargeRequestTests.cs" />
+    <Compile Remove="Model\CreateCheckoutRequestFeaturesTests.cs" />
+    <Compile Remove="Model\CreateCheckoutRequestFeaturesTokenisationTests.cs" />
+    <Compile Remove="Model\CreateCheckoutRequestTests.cs" />
+    <Compile Remove="Model\CreateRefundRequestTests.cs" />
+    <Compile Remove="Model\CreateTokenRequestTests.cs" />
+    <Compile Remove="Model\CustomerTests.cs" />
+    <Compile Remove="Model\FlightadditionaldetailsPassengersTests.cs" />
+    <Compile Remove="Model\FlightadditionaldetailsTests.cs" />
+    <Compile Remove="Model\HateoaslinksLinksTests.cs" />
+    <Compile Remove="Model\HateoasLinksTests.cs" />
+    <Compile Remove="Model\InlineResponse200Tests.cs" />
+    <Compile Remove="Model\MetadataTests.cs" />
+    <Compile Remove="Model\OrderItemAdditionalDetailsTests.cs" />
+    <Compile Remove="Model\OrderItemTests.cs" />
+    <Compile Remove="Model\OrderShippingTests.cs" />
+    <Compile Remove="Model\OrderShippingTrackingTests.cs" />
+    <Compile Remove="Model\SettlementTests.cs" />
+    <Compile Remove="Model\SettlementTransactionsTests.cs" />
+    <Compile Remove="Model\ShopperStatisticsTests.cs" />
+    <Compile Remove="Model\ShopperTests.cs" />
+    <Compile Remove="Model\TokenTests.cs" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,7 +1,7 @@
 /* 
  * Merchant API
  *
- * ZipMoney Merchant API Initial build
+ * Afterpay Merchant API Initial build
  *
  * OpenAPI spec version: 2017-03-01
  * 
@@ -33,7 +33,7 @@ namespace MerchantApi.Test
     public class RefundTests
     {
         // TODO uncomment below to declare an instance variable for Refund
-        //private Refund instance;
+        private Refund instance;
 
         /// <summary>
         /// Setup before each test
@@ -41,8 +41,7 @@ namespace MerchantApi.Test
         [SetUp]
         public void Init()
         {
-            // TODO uncomment below to create an instance of Refund
-            //instance = new Refund();
+            instance = new Refund();
         }
 
         /// <summary>
@@ -60,57 +59,9 @@ namespace MerchantApi.Test
         [Test]
         public void RefundInstanceTest()
         {
-            // TODO uncomment below to test "IsInstanceOfType" Refund
-            //Assert.IsInstanceOfType<Refund> (instance, "variable 'instance' is a Refund");
-        }
-
-        /// <summary>
-        /// Test the property 'Id'
-        /// </summary>
-        [Test]
-        public void IdTest()
-        {
-            // TODO unit test for the property 'Id'
-        }
-        /// <summary>
-        /// Test the property 'ChargeId'
-        /// </summary>
-        [Test]
-        public void ChargeIdTest()
-        {
-            // TODO unit test for the property 'ChargeId'
-        }
-        /// <summary>
-        /// Test the property 'Reason'
-        /// </summary>
-        [Test]
-        public void ReasonTest()
-        {
-            // TODO unit test for the property 'Reason'
-        }
-        /// <summary>
-        /// Test the property 'Amount'
-        /// </summary>
-        [Test]
-        public void AmountTest()
-        {
-            // TODO unit test for the property 'Amount'
-        }
-        /// <summary>
-        /// Test the property 'Created'
-        /// </summary>
-        [Test]
-        public void CreatedTest()
-        {
-            // TODO unit test for the property 'Created'
-        }
-        /// <summary>
-        /// Test the property 'Metadata'
-        /// </summary>
-        [Test]
-        public void MetadataTest()
-        {
-            // TODO unit test for the property 'Metadata'
+            var amount = new Money("17.17", "NZD");
+            instance = new Refund("Id", amount, "Merchant Reference", "RefindId", "2021-01-01T12:00:00", "RefundMerchantReference");
+            Assert.IsInstanceOf<Refund> (instance, "variable 'instance' is a Refund");
         }
 
     }

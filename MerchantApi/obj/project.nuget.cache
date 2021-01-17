@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "J38CfY33n0ai3CstRrewTvX7BUyrL8W+EZSPgadiSBhTiAe5d2qGuHLYZdVpcKUxz/cEd8uzC7y26pnZLnunlA==",
+  "dgSpecHash": "XJxv2ktggkE6HDVAX7NgoQyaupuexFPtgeTkkKVzYexVcJ7XBgDHcvXeUDd7SQ/2SPxTwB4UtNibzErmNKe48A==",
   "success": true,
-  "projectFilePath": "M:\\Production\\GitRepos\\ZipNZMerchantApi\\MerchantApi\\MerchantApi.csproj",
+  "projectFilePath": "M:\\Production\\GitRepos\\AfterpayMerchantApi\\MerchantApi\\MerchantApi.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\user\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512",

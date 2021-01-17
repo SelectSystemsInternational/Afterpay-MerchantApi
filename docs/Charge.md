@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **Reference** | **string** |  | [optional] 
 **Amount** | **decimal?** |  | 
 **Currency** | **string** |  | 
-**State** | **string** |  | 
+**PhoneNumber** | **string** |  | 
 **CapturedAmount** | **decimal?** |  | 
 **RefundedAmount** | **decimal?** | The amount of the charge that has been refunded  | 
 **CreatedDate** | **DateTime?** |  | 

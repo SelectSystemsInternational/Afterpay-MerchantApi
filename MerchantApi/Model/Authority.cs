@@ -1,7 +1,7 @@
 /* 
  * Merchant API
  *
- * ZipMoney Merchant API Initial build
+ * Afterpay Merchant API Initial build
  *
  * OpenAPI spec version: 2017-03-01
  * 
@@ -9,13 +9,9 @@
  */
 
 using System;
-using System.Linq;
 using System.IO;
 using System.Text;
-using System.Text.RegularExpressions;
-using System.Collections;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
@@ -49,6 +45,7 @@ namespace MerchantApi.Model
         /// <value>The type of authority (checkout_id, account_token, store_code)</value>
         [DataMember(Name="grant_type", EmitDefaultValue=false)]
         public TypeEnum? GrantType { get; set; }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Authority" /> class.
         /// </summary>
@@ -59,7 +56,7 @@ namespace MerchantApi.Model
         /// </summary>
         /// <param name="Type">The type of authority (checkout_id, account_token, store_code) (required).</param>
         /// <param name="Value">The authority value/token (required).</param>
-        public AuthorityRequest(TypeEnum? GrantType = default(TypeEnum?), string Audience = default(string), string ClientId = default(string), string ClientSecret = default(string))
+        public AuthorityRequest(TypeEnum? GrantType = default(TypeEnum?), string MerchantId = default(string), string MerchantSecretKey = default(string))
         {
             // to ensure "GrantType" is required (not null)
             if (GrantType == null)
@@ -70,32 +67,23 @@ namespace MerchantApi.Model
             {
                 this.GrantType = GrantType;
             }
-            // to ensure "Audience" is required (not null)
-            if (Audience == null)
+            // to ensure "MerchantId" is required (not null)
+            if (MerchantId == null)
             {
-                throw new InvalidDataException("Audience is a required property for Authority and cannot be null");
+                throw new InvalidDataException("MerchantId is a required property for Authority and cannot be null");
             }
             else
             {
-                this.Audience = Audience;
+                this.MerchantId = MerchantId;
             }
-            // to ensure "ClientId" is required (not null)
-            if (ClientId == null)
+            // to ensure "MerchantSecretKey" is required (not null)
+            if (MerchantSecretKey == null)
             {
-                throw new InvalidDataException("ClientId is a required property for Authority and cannot be null");
-            }
-            else
-            {
-                this.ClientId = ClientId;
-            }
-            // to ensure "ClientSecret" is required (not null)
-            if (ClientSecret == null)
-            {
-                throw new InvalidDataException("ClientSecret is a required property for Authority and cannot be null");
+                throw new InvalidDataException("MerchantSecretKey is a required property for Authority and cannot be null");
             }
             else
             {
-                this.ClientSecret = ClientSecret;
+                this.MerchantSecretKey = MerchantSecretKey;
             }
         }
         
@@ -103,14 +91,12 @@ namespace MerchantApi.Model
         /// The authority value/token
         /// </summary>
         /// <value>The authority value/token</value>
-        [DataMember(Name = "audience", EmitDefaultValue=false)]
-        public string Audience { get; set; }
 
-        [DataMember(Name = "client_id", EmitDefaultValue = false)]
-        public string ClientId { get; set; }
+        [DataMember(Name = "merchantid", EmitDefaultValue = false)]
+        public string MerchantId { get; set; }
 
-        [DataMember(Name = "client_secret", EmitDefaultValue = false)]
-        public string ClientSecret { get; set; }
+        [DataMember(Name = "merchant_secret_key", EmitDefaultValue = false)]
+        public string MerchantSecretKey { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -121,9 +107,8 @@ namespace MerchantApi.Model
             var sb = new StringBuilder();
             sb.Append("class Authority {\n");
             sb.Append("  GrantType: ").Append(GrantType).Append("\n");
-            sb.Append("  Audience: ").Append(Audience).Append("\n");
-            sb.Append("  ClientId: ").Append(ClientId).Append("\n");
-            sb.Append("  ClientSecret: ").Append(ClientSecret).Append("\n");
+            sb.Append("  MerchantId: ").Append(MerchantId).Append("\n");
+            sb.Append("  MerchantSecretKey: ").Append(MerchantSecretKey).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -164,21 +149,16 @@ namespace MerchantApi.Model
                     this.GrantType == other.GrantType ||
                     this.GrantType != null &&
                     this.GrantType.Equals(other.GrantType)
-                ) && 
-                (
-                    this.Audience == other.Audience ||
-                    this.Audience != null &&
-                    this.Audience.Equals(other.Audience)
                 ) &&
                 (
-                    this.ClientId == other.ClientId ||
-                    this.ClientId != null &&
-                    this.ClientId.Equals(other.ClientId)
+                    this.MerchantId == other.MerchantId ||
+                    this.MerchantId != null &&
+                    this.MerchantId.Equals(other.MerchantId)
                 ) &&
                 (
-                    this.ClientSecret == other.ClientSecret ||
-                    this.ClientSecret != null &&
-                    this.ClientSecret.Equals(other.ClientSecret)
+                    this.MerchantSecretKey == other.MerchantSecretKey ||
+                    this.MerchantSecretKey != null &&
+                    this.MerchantSecretKey.Equals(other.MerchantSecretKey)
                 );
         }
 
@@ -195,12 +175,10 @@ namespace MerchantApi.Model
                 // Suitable nullity checks etc, of course :)
                 if (this.GrantType != null)
                     hash = hash * 59 + this.GrantType.GetHashCode();
-                if (this.Audience != null)
-                    hash = hash * 59 + this.Audience.GetHashCode();
-                if (this.ClientId != null)
-                    hash = hash * 59 + this.ClientId.GetHashCode();
-                if (this.ClientSecret != null)
-                    hash = hash * 59 + this.ClientSecret.GetHashCode();
+                if (this.MerchantId != null)
+                    hash = hash * 59 + this.MerchantId.GetHashCode();
+                if (this.MerchantSecretKey != null)
+                    hash = hash * 59 + this.MerchantSecretKey.GetHashCode();
                 return hash;
             }
         }

@@ -3,7 +3,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Pickup** | **bool?** | States if the shipping method is pickup, otherwise the shipping address should be provided | [optional] 
+**Pickup** | **bool?** | PhoneNumbers if the shipping method is pickup, otherwise the shipping address should be provided | [optional] 
 **Tracking** | [**OrderShippingTracking**](OrderShippingTracking.md) |  | [optional] 
 **Address** | [**Address**](Address.md) |  | [optional] 
 

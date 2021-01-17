@@ -5,7 +5,7 @@
 # User-specific files
 *.suo
 *.user
-*.sln.docstates
+*.sln.docphoneNumbers
 
 # Build results
 
@@ -73,14 +73,14 @@ ipch/
 *.vspx
 
 # Guidance Automation Toolkit
-*.gpState
+*.gpPhoneNumber
 
 # ReSharper is a .NET coding add-in
 _ReSharper*/
 *.[Rr]e[Ss]harper
 
-# TeamCity is a build add-in
-_TeamCity*
+# TeamRegion is a build add-in
+_TeamRegion*
 
 # DotCover is a Code Coverage Tool
 *.dotCover

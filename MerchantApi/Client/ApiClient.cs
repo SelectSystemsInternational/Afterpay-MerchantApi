@@ -1,7 +1,7 @@
 /* 
  * Merchant API
  *
- * ZipMoney Merchant API Initial build
+ * Afterpay Merchant API Initial build
  *
  * OpenAPI spec version: 2017-03-01
  * 
@@ -48,17 +48,17 @@ namespace MerchantApi.Client
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ApiClient" /> class
-        /// with default configuration and base path (https://merchant-auth-nz.sandbox.zip.com/).
+        /// with default configuration and base path (https://api-sandbox.afterpay.com/v2/).
         /// </summary>
         public ApiClient()
         {
             Configuration = Configuration.Default;
-            RestClient = new RestClient("https://merchant-auth-nz.sandbox.zip.com/");
+            RestClient = new RestClient("https://api-sandbox.afterpay.com/v2/");
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ApiClient" /> class
-        /// with default base path (https://merchant-auth-nz.sandbox.zip.com/).
+        /// with default base path (https://api-sandbox.afterpay.com/v2/).
         /// </summary>
         /// <param name="config">An instance of Configuration.</param>
         public ApiClient(Configuration config = null)
@@ -68,7 +68,7 @@ namespace MerchantApi.Client
             else
                 Configuration = config;
 
-            RestClient = new RestClient("https://merchant-auth-nz.sandbox.zip.com/");
+            RestClient = new RestClient("https://api-sandbox.afterpay.com/v2/");
         }
 
         /// <summary>
@@ -76,7 +76,7 @@ namespace MerchantApi.Client
         /// with default configuration.
         /// </summary>
         /// <param name="basePath">The base path.</param>
-        public ApiClient(String basePath = "https://merchant-auth-nz.sandbox.zip.com/")
+        public ApiClient(String basePath = "https://api-sandbox.afterpay.com/v2/")
         {
            if (String.IsNullOrEmpty(basePath))
                 throw new ArgumentException("basePath cannot be empty");
