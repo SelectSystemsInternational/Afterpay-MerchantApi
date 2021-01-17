@@ -72,12 +72,12 @@ namespace MerchantApi.Test
             //client.Timeout = -1;
             //var request = new RestRequest(Method.GET);
             //request.AddHeader("Accept", "*/*");
-            //var authorization = Convert.ToBase64String(Encoding.Default.GetBytes("41819:97e7abb094337049f15b5daf1b273e56d09e8cbf9a2d21f50c28092de5590b3534a90448fc5dd8e633a906c6f7d55b86dedcbd69e7e1fe1029dc44385bfe696e"));
+            //var authorization = Convert.ToBase64String(Encoding.Default.GetBytes("MerchantId:MerchantSecretKey"));
             //request.AddHeader("Authorization", $"Basic {authorization}"); 
             //IRestResponse response = client.Execute(request);
 
-            instance.Configuration.MerchantId = "41819";
-            instance.Configuration.MerchantSecretKey = "97e7abb094337049f15b5daf1b273e56d09e8cbf9a2d21f50c28092de5590b3534a90448fc5dd8e633a906c6f7d55b86dedcbd69e7e1fe1029dc44385bfe696e";
+            instance.Configuration.MerchantId = "MerchantId";
+            instance.Configuration.MerchantSecretKey = "MerchantSecretKey";
             instance.Configuration.UserAgent = "Afterpay SDK; .netCore3.1";
 
             var response = instance.AuthorizationCreateToken();
