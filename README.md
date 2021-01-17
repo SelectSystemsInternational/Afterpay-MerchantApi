@@ -20,15 +20,17 @@ Afterpay Merchant API Initial build
 
 <a name="installation"></a>
 ## Installation
-Download Zip and Include Directories 
+```
+Download Zip
+Include Directories
 /Api
 /Client
-/Model 
+/Model
 from MerchantApi in your Project
 
-Add 
 using MerchantApi.Api;
 using MerchantApi.Model;
+```
 
 <a name="documentation-for-api-endpoints"></a>
 ## Documentation for API Endpoints
