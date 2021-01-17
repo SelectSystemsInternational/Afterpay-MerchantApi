@@ -23,7 +23,6 @@ Afterpay Merchant API Initial build
 Download Zip and Include Directories from MerchantApi in your Project
 
 using MerchantApi.Api;
-
 using MerchantApi.Model;
 
 <a name="documentation-for-api-endpoints"></a>
@@ -32,4 +31,4 @@ using MerchantApi.Model;
 
 <a name="status"></a>
 ## Status of Library
-This is the inital build and is not yet complete:
+This is the inital build and unit tests have been completed
