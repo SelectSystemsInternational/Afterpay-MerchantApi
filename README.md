@@ -25,21 +25,6 @@ Download Zip and Include Directories from MerchantApi in your Project
 using MerchantApi.Api;
 using MerchantApi.Model;
 
-<a name="getting-started"></a>
-## Getting Started
-
-```csharp
-using System;
-using System.Diagnostics;
-using MerchantApi.Api;
-using MerchantApi.Model;
-
-namespace MerchantApi.Example
-{
-
-}
-```
-
 <a name="documentation-for-api-endpoints"></a>
 ## Documentation for API Endpoints
 *https://developers.afterpay.com/afterpay-online/docs/api-quickstart*
