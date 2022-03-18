@@ -9,7 +9,7 @@ Afterpay Merchant API Initial build
 
 <a name="frameworks-supported"></a>
 ## Frameworks supported
-- .netCore 3.1 or later
+- .netCore 6
 
 <a name="dependencies"></a>
 ## Dependencies
