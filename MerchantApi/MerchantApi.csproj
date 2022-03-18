@@ -3,9 +3,9 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
     <Description>Afterpay MerchantApi C#</Description>
-    <Version>2.1.0.1</Version>
+    <Version>2.1.6.0</Version>
     <PackageProjectUrl>https://github.com/users/SelectSystemsInternational/projects/19</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/SelectSystemsInternational/ZipNZMerchantApi</RepositoryUrl>
+    <RepositoryUrl>https://github.com/SelectSystemsInternational/Afterpay-MerchantApi</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
   </PropertyGroup>
 
@@ -49,9 +49,9 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
-    <PackageReference Include="RestSharp" Version="106.11.7" />
-    <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0-rc.2.20475.5" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="RestSharp" Version="107.3.0" />
+    <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
   </ItemGroup>
 
   <ItemGroup>

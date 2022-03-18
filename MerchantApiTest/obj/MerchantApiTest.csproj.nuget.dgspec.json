@@ -18,18 +18,19 @@
         ],
         "configFilePaths": [
           "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "netcoreapp3.1"
+          "net6.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "netcoreapp3.1": {
-            "targetAlias": "netcoreapp3.1",
+          "net6.0": {
+            "targetAlias": "net6.0",
             "projectReferences": {
               "M:\\Production\\GitRepos\\AfterpayMerchantApi\\MerchantApi\\MerchantApi.csproj": {
                 "projectPath": "M:\\Production\\GitRepos\\AfterpayMerchantApi\\MerchantApi\\MerchantApi.csproj"
@@ -44,20 +45,20 @@
         }
       },
       "frameworks": {
-        "netcoreapp3.1": {
-          "targetAlias": "netcoreapp3.1",
+        "net6.0": {
+          "targetAlias": "net6.0",
           "dependencies": {
             "Microsoft.NET.Test.Sdk": {
               "target": "Package",
-              "version": "[16.5.0, )"
+              "version": "[17.1.0, )"
             },
             "NUnit": {
               "target": "Package",
-              "version": "[3.12.0, )"
+              "version": "[3.13.2, )"
             },
             "NUnit3TestAdapter": {
               "target": "Package",
-              "version": "[3.16.1, )"
+              "version": "[4.2.1, )"
             }
           },
           "imports": [
@@ -75,12 +76,12 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.102\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.300-preview.22154.4\\RuntimeIdentifierGraph.json"
         }
       }
     },
     "M:\\Production\\GitRepos\\AfterpayMerchantApi\\MerchantApi\\MerchantApi.csproj": {
-      "version": "2.1.0.1",
+      "version": "2.1.6",
       "restore": {
         "projectUniqueName": "M:\\Production\\GitRepos\\AfterpayMerchantApi\\MerchantApi\\MerchantApi.csproj",
         "projectName": "MerchantApi",
@@ -93,6 +94,7 @@
         ],
         "configFilePaths": [
           "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -124,15 +126,15 @@
             },
             "Newtonsoft.Json": {
               "target": "Package",
-              "version": "[12.0.3, )"
+              "version": "[13.0.1, )"
             },
             "RestSharp": {
               "target": "Package",
-              "version": "[106.11.7, )"
+              "version": "[107.3.0, )"
             },
             "System.ComponentModel.Annotations": {
               "target": "Package",
-              "version": "[5.0.0-rc.2.20475.5, )"
+              "version": "[5.0.0, )"
             }
           },
           "imports": [
@@ -150,7 +152,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.102\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.300-preview.22154.4\\RuntimeIdentifierGraph.json"
         }
       }
     }

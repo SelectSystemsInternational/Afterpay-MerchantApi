@@ -38,7 +38,8 @@ namespace MerchantApi.Test
         [SetUp]
         public void Init()
         {
-            instance = new AuthorizationApi("https://api-sandbox.afterpay.com/v2/");
+            string useragent = "nopCommerce v4.40 Afterpay Payment Plugin; .netCore6.0; Ip Address: 1.1.1.1; Merchant Id: 11111;";
+            instance = new AuthorizationApi("https://api-sandbox.afterpay.com/v2/", useragent);
         }
 
         /// <summary>
@@ -72,15 +73,15 @@ namespace MerchantApi.Test
             //client.Timeout = -1;
             //var request = new RestRequest(Method.GET);
             //request.AddHeader("Accept", "*/*");
-            //var authorization = Convert.ToBase64String(Encoding.Default.GetBytes("MerchantId:MerchantSecretKey"));
+            //var authorization = Convert.ToBase64String(Encoding.Default.GetBytes("41819:97e7abb094337049f15b5daf1b273e56d09e8cbf9a2d21f50c28092de5590b3534a90448fc5dd8e633a906c6f7d55b86dedcbd69e7e1fe1029dc44385bfe696e"));
             //request.AddHeader("Authorization", $"Basic {authorization}"); 
             //IRestResponse response = client.Execute(request);
 
-            instance.Configuration.MerchantId = "MerchantId";
-            instance.Configuration.MerchantSecretKey = "MerchantSecretKey";
-            instance.Configuration.UserAgent = "Afterpay SDK; .netCore3.1";
+            instance.Configuration.MerchantId = "41819";
+            instance.Configuration.MerchantSecretKey = "97e7abb094337049f15b5daf1b273e56d09e8cbf9a2d21f50c28092de5590b3534a90448fc5dd8e633a906c6f7d55b86dedcbd69e7e1fe1029dc44385bfe696e";
+            instance.Configuration.UserAgent = "Afterpay SDK";
 
-            var response = instance.AuthorizationCreateToken();
+            var response = instance.AuthorizationCreateTokenAsync().Result;
 
             Assert.IsInstanceOf<Authentication>(response, "response is AccessToken");
         }

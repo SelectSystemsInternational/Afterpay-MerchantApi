@@ -11,12 +11,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Text.RegularExpressions;
 using System.IO;
-using System.Web;
+using System.Threading.Tasks;
 using System.Linq;
-using System.Net;
 using System.Text;
 using Newtonsoft.Json;
 using RestSharp;
@@ -37,14 +35,14 @@ namespace MerchantApi.Client
         /// Allows for extending request processing for <see cref="ApiClient"/> generated code.
         /// </summary>
         /// <param name="request">The RestSharp request object</param>
-        partial void InterceptRequest(IRestRequest request);
+        partial void InterceptRequest(Object request);
 
         /// <summary>
         /// Allows for extending response processing for <see cref="ApiClient"/> generated code.
         /// </summary>
         /// <param name="request">The RestSharp request object</param>
         /// <param name="response">The RestSharp response object</param>
-        partial void InterceptResponse(IRestRequest request, IRestResponse response);
+        partial void InterceptResponse(Object request, Object response);
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ApiClient" /> class
@@ -81,8 +79,17 @@ namespace MerchantApi.Client
            if (String.IsNullOrEmpty(basePath))
                 throw new ArgumentException("basePath cannot be empty");
 
-            RestClient = new RestClient(basePath);
             Configuration = Configuration.Default;
+
+            var options = new RestClientOptions(basePath)//ToDo
+            {
+                ThrowOnAnyError = true,
+                Timeout = Configuration.Timeout,
+                UserAgent = Configuration.UserAgent
+            };
+
+            RestClient = new RestClient(options);
+
         }
 
         /// <summary>
@@ -122,11 +129,11 @@ namespace MerchantApi.Client
             foreach(var param in formParams)
                 request.AddParameter(param.Key, param.Value);
 
-            // add file parameter, if any
-            foreach(var param in fileParams)
-            {
-                request.AddFile(param.Value.Name, param.Value.Writer, param.Value.FileName, param.Value.ContentLength, param.Value.ContentType);
-            }
+            //// add file parameter, if any
+            //foreach(var param in fileParams)
+            //{
+            //    request.AddFile(param.Value.Name, param.Value..Writer, param.Value.FileName, param.Value.ContentLength, param.Value.ContentType);
+            //}
 
             if (postBody != null) // http body (model or byte[]) parameter
             {
@@ -156,7 +163,7 @@ namespace MerchantApi.Client
         /// <param name="pathParams">Path parameters.</param>
         /// <param name="contentType">Content Type of the request</param>
         /// <returns>Object</returns>
-        public Object CallApi(
+        public async Task<RestResponse> CallApi(
             String path, RestSharp.Method method, Dictionary<String, String> queryParams, Object postBody,
             Dictionary<String, String> headerParams, Dictionary<String, String> formParams,
             Dictionary<String, FileParameter> fileParams, Dictionary<String, String> pathParams,
@@ -166,16 +173,13 @@ namespace MerchantApi.Client
                 path, method, queryParams, postBody, headerParams, formParams, fileParams,
                 pathParams, contentType);
 
-            // set timeout
-            RestClient.Timeout = Configuration.Timeout;
-            // set user agent
-            RestClient.UserAgent = Configuration.UserAgent;
+            var client = new ApiClient();
 
             InterceptRequest(request);
-            var response = RestClient.Execute(request);
+            var response = await client.RestClient.ExecuteAsync(request);
             InterceptResponse(request, response);
 
-            return (Object) response;
+            return (RestResponse) response;
         }
         /// <summary>
         /// Makes the asynchronous HTTP request.
@@ -271,9 +275,8 @@ namespace MerchantApi.Client
         /// <param name="response">The HTTP response.</param>
         /// <param name="type">Object type.</param>
         /// <returns>Object representation of the JSON string.</returns>
-        public object Deserialize(IRestResponse response, Type type)
+        public object Deserialize(RestResponse response, Type type)
         {
-            IList<Parameter> headers = response.Headers;
             if (type == typeof(byte[])) // return byte array
             {
                 return response.RawBytes;
@@ -281,13 +284,13 @@ namespace MerchantApi.Client
 
             if (type == typeof(Stream))
             {
-                if (headers != null)
+                if (response.Headers != null)
                 {
                     var filePath = String.IsNullOrEmpty(Configuration.TempFolderPath)
                         ? Path.GetTempPath()
                         : Configuration.TempFolderPath;
                     var regex = new Regex(@"Content-Disposition=.*filename=['""]?([^'""\s]+)['""]?$");
-                    foreach (var header in headers)
+                    foreach (var header in response.Headers)
                     {
                         var match = regex.Match(header.ToString());
                         if (match.Success)

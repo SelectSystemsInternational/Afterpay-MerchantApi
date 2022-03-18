@@ -11,6 +11,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+
 using RestSharp;
 using MerchantApi.Client;
 using MerchantApi.Model;
@@ -23,7 +25,13 @@ namespace MerchantApi.Api
     public interface IPaymentsApi : IApiAccessor
     {
 
-        #region Synchronous Operations
+        /// <summary>
+        /// This endpoint performs a payment capture for the full value of the payment plan.
+        /// </summary>
+        /// <exception cref="MerchantApi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="body">CaptureFull Body, required.</param>
+        /// <returns>ApiResponse of Payment</returns>
+        public Task<Payment> PaymentFullCaptureAsync(CaptureFull body = null);
 
         /// <summary>
         /// This endpoint performs a payment capture for the full value of the payment plan.
@@ -31,7 +39,7 @@ namespace MerchantApi.Api
         /// <exception cref="MerchantApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body">CaptureFull Body, required.</param>
         /// <returns>ApiResponse of Payment</returns>
-        Payment PaymentFullCapture(CaptureFull body = null);
+        public Task<ApiResponse<Payment>> PaymentFullCaptureWithHttpInfoAsync(CaptureFull body = null);
 
         /// <summary>
         /// This endpoint requests a payment auth, which determines the order approval status
@@ -39,7 +47,15 @@ namespace MerchantApi.Api
         /// <exception cref="MerchantApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body">Auth Body, required.</param>
         /// <returns>ApiResponse of Payment</returns>
-        Payment PaymentAuth(Auth body = null);
+        public Task<Payment> PaymentAuthAsync(Auth body = null);
+
+        /// <summary>
+        /// This endpoint requests a payment auth, which determines the order approval status
+        /// </summary>
+        /// <exception cref="MerchantApi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="body">Auth Body, required.</param>
+        /// <returns>ApiResponse of Payment</returns>
+        public Task<ApiResponse<Payment>> PaymentAuthWithHttpInfoAsync(Auth body = null);
 
         /// <summary>
         /// This endpoint captures a full or partial payment.
@@ -48,7 +64,16 @@ namespace MerchantApi.Api
         /// <param name="id">Id, required.</param>
         /// <param name="body">Capture Body, required.</param>
         /// <returns>ApiResponse of Payment</returns>
-        Payment PaymentCapture(string id, Capture body = null);
+        public Task<Payment> PaymentCaptureAsync(string id, Capture body = null);
+
+        /// <summary>
+        /// This endpoint captures a full or partial payment.
+        /// </summary>
+        /// <exception cref="MerchantApi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id">Id, required.</param>
+        /// <param name="body">Capture Body, required.</param>
+        /// <returns>ApiResponse of Payment</returns>
+        public Task<ApiResponse<Payment>> PaymentCaptureWithHttpInfoAsync(string id, Capture body = null);
 
         /// <summary>
         /// This endpoint captures a full or partial refund.
@@ -57,7 +82,16 @@ namespace MerchantApi.Api
         /// <param name="id">Id, required.</param>
         /// <param name="body">Refund Body, required.</param>
         /// <returns>ApiResponse of Refund</returns>
-        Refund PaymentRefund(string id, Refund body = null);
+        public Task<Refund> PaymentRefundAsync(string id, Refund body = null);
+
+        /// <summary>
+        /// This endpoint captures a full or partial refund.
+        /// </summary>
+        /// <exception cref="MerchantApi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id">Id, required.</param>
+        /// <param name="body">Refund Body, required.</param>
+        /// <returns>ApiResponse of Refund</returns>
+        public Task<ApiResponse<Refund>> PaymentRefundWithHttpInfoAsync(string id, Refund body = null);
 
         /// <summary>
         /// Voids a Payment.  
@@ -65,7 +99,15 @@ namespace MerchantApi.Api
         /// <exception cref="MerchantApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">Id, required.</param>
         /// <returns>ApiResponse of Void</returns>
-        Model.Void PaymentVoid(string id);
+        public Task<Model.Void> PaymentVoidAsync(string id);
+
+        /// <summary>
+        /// Voids a Payment.  
+        /// </summary>
+        /// <exception cref="MerchantApi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id">Id, required.</param>
+        /// <returns>ApiResponse of Void</returns>
+        public Task<ApiResponse<Model.Void>> PaymentVoidWithHttpInfoAsync(string id);
 
         /// <summary>
         /// Retrieve a Payment Retrieves a previously created Order by id.
@@ -73,7 +115,15 @@ namespace MerchantApi.Api
         /// <exception cref="MerchantApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">Id, required.</param>
         /// <returns>Payment</returns>
-        Payment PaymentGet(string id);
+        public Task<Payment> PaymentGetAsync(string id);
+
+        /// <summary>
+        /// Retrieve a Payment Retrieves a previously created Order by id.
+        /// </summary>
+        /// <exception cref="MerchantApi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id">Id, required.</param>
+        /// <returns>ApiResponse of Payment</returns>
+        public Task<ApiResponse<Payment>> PaymentGetWithHttpInfoAsync(string id);
 
         /// <summary>
         /// Retrieve a Payment by Token
@@ -81,7 +131,15 @@ namespace MerchantApi.Api
         /// <exception cref="MerchantApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="token">Payment Token, required.</param>
         /// <returns>Payment</returns>
-        Payment PaymentGetByToken(string token);
+        public Task<Payment> PaymentGetByTokenAsync(string token);
+
+        /// <summary>
+        /// Retrieve a Payment by Token
+        /// </summary>
+        /// <exception cref="MerchantApi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="token">Payment Token, required.</param>
+        /// <returns>ApiResponse of Payment</returns>
+        public Task<ApiResponse<Payment>> PaymentGetByTokenWithHttpInfoAsync(string token);
 
         /// <summary>
         /// Updates the Merchant Reference for a previously created payment by id.
@@ -89,8 +147,17 @@ namespace MerchantApi.Api
         /// <exception cref="MerchantApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">Id, required.</param>
         /// <param name="body">ShippingCourier Body, required.</param>
-        /// <returns>IRestResponse</returns>
-        IRestResponse PaymentUpdateShippingCourier(string id, ShippingCourier body = null);
+        /// <returns>RestResponse</returns>
+        public Task<RestResponse> PaymentUpdateShippingCourierAsync(string id, ShippingCourier body = null);
+
+        /// <summary>
+        /// Updates the Merchant Reference for a previously created payment by id.
+        /// </summary>
+        /// <exception cref="MerchantApi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id">Id, required.</param>
+        /// <param name="body">ShippingCourier Body, required.</param>
+        /// <returns>RestResponse</returns>
+        public Task<RestResponse> PaymentUpdateShippingCourierWithHttpInfoAsync(string id, ShippingCourier body = null);
 
         /// <summary>
         /// Updates the Merchant Reference for a previously created payment by id.
@@ -98,14 +165,18 @@ namespace MerchantApi.Api
         /// <exception cref="MerchantApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">Id, required.</param>
         /// <param name="body">MerchantReference Body, required.</param>
-        /// <returns>IRestResponse</returns>
-        IRestResponse PaymentUpdateMerchantReference(string id, MerchantReference body = null);
+        /// <returns>RestResponse</returns>
+        public Task<RestResponse> PaymentUpdateMerchantReferenceAsync(string id, MerchantReference body = null);
 
-        #endregion Synchronous Operations
+        /// <summary>
+        /// Updates the Merchant Reference for a previously created payment by id.
+        /// </summary>
+        /// <exception cref="MerchantApi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id">Id, required.</param>
+        /// <param name="body">MerchantReference Body, required.</param>
+        /// <returns>RestResponse</returns>
+        public Task<RestResponse> PaymentUpdateMerchantReferenceWithHttpInfoAsync(string id, MerchantReference body = null);
 
-        #region Asynchronous Operations
-
-        #endregion Asynchronous Operations
 
     }
 
@@ -161,7 +232,7 @@ namespace MerchantApi.Api
         /// <value>The base path</value>
         public String GetBasePath()
         {
-            return this.Configuration.ApiClient.RestClient.BaseUrl.ToString();
+            return this.Configuration.ApiClient.RestClient.ToString(); //ToDo
         }
 
         /// <summary>
@@ -192,13 +263,13 @@ namespace MerchantApi.Api
         /// <exception cref="MerchantApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body">CaptureFull Body, required.</param>
         /// <returns>ApiResponse of Payment</returns>
-        public Payment PaymentFullCapture(CaptureFull body = null)
+        public async Task<Payment> PaymentFullCaptureAsync(CaptureFull body = null)
         {
             // verify the required parameter 'body' is set
             if (body == null)
                 throw new ApiException(400, "Missing required parameter 'body' when calling PaymentsApi->PaymentFullCapture");
 
-            ApiResponse<Payment> localVarResponse = PaymentFullCaptureWithHttpInfo(body);
+            ApiResponse<Payment> localVarResponse = await PaymentFullCaptureWithHttpInfoAsync(body);
             return localVarResponse.Data;
         }
 
@@ -208,7 +279,7 @@ namespace MerchantApi.Api
         /// <exception cref="MerchantApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body">CaptureFull Body, required.</param>
         /// <returns>ApiResponse of Payment</returns>
-        public ApiResponse<Payment> PaymentFullCaptureWithHttpInfo(CaptureFull body = null)
+        public async Task<ApiResponse<Payment>> PaymentFullCaptureWithHttpInfoAsync(CaptureFull body = null)
         {
             var localVarPath = GetBasePath() + "payments/capture";
             var localVarPathParams = new Dictionary<String, String>();
@@ -251,8 +322,8 @@ namespace MerchantApi.Api
             }
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse)Configuration.ApiClient.CallApi(localVarPath,
-                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = await Configuration.ApiClient.CallApi(localVarPath,
+                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
             int localVarStatusCode = (int)localVarResponse.StatusCode;
@@ -275,13 +346,13 @@ namespace MerchantApi.Api
         /// <exception cref="MerchantApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body">Auth Body, required.</param>
         /// <returns>ApiResponse of Payment</returns>
-        public Payment PaymentAuth(Auth body = null)
+        public async Task<Payment> PaymentAuthAsync(Auth body = null)
         {
             // verify the required parameter 'body' is set
             if (body == null)
                 throw new ApiException(400, "Missing required parameter 'body' when calling PaymentsApi->PaymentAuth");
 
-            ApiResponse<Payment> localVarResponse = PaymentAuthWithHttpInfo(body);
+            ApiResponse<Payment> localVarResponse = await PaymentAuthWithHttpInfoAsync(body);
             return localVarResponse.Data;
         }
 
@@ -291,7 +362,7 @@ namespace MerchantApi.Api
         /// <exception cref="MerchantApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body">Auth Body, required.</param>
         /// <returns>ApiResponse of Payment</returns>
-        public ApiResponse<Payment> PaymentAuthWithHttpInfo(Auth body = null)
+        public async Task<ApiResponse<Payment>> PaymentAuthWithHttpInfoAsync(Auth body = null)
         {
             var localVarPath = GetBasePath() + "payments/auth";
             var localVarPathParams = new Dictionary<String, String>();
@@ -334,8 +405,8 @@ namespace MerchantApi.Api
             }
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse)Configuration.ApiClient.CallApi(localVarPath,
-                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = await Configuration.ApiClient.CallApi(localVarPath,
+                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
             int localVarStatusCode = (int)localVarResponse.StatusCode;
@@ -359,7 +430,7 @@ namespace MerchantApi.Api
         /// <param name="id">Id, required.</param>
         /// <param name="body">Capture Body, required.</param>
         /// <returns>ApiResponse of Payment</returns>
-        public Payment PaymentCapture(string id, Capture body = null)
+        public async Task<Payment> PaymentCaptureAsync(string id, Capture body = null)
         {
             // verify the required parameter 'id' is set
             if (id == null)
@@ -368,7 +439,7 @@ namespace MerchantApi.Api
             if (body == null)
                 throw new ApiException(400, "Missing required parameter 'body' when calling PaymentsApi->PaymentCapture");
 
-            ApiResponse<Payment> localVarResponse = PaymentCaptureWithHttpInfo(id, body);
+            ApiResponse<Payment> localVarResponse = await PaymentCaptureWithHttpInfoAsync(id, body);
             return localVarResponse.Data;
         }
 
@@ -379,7 +450,7 @@ namespace MerchantApi.Api
         /// <param name="id">Id, required.</param>
         /// <param name="body">Capture Body, required.</param>
         /// <returns>ApiResponse of Payment</returns>
-        public ApiResponse<Payment> PaymentCaptureWithHttpInfo(string id, Capture body = null)
+        public async Task<ApiResponse<Payment>> PaymentCaptureWithHttpInfoAsync(string id, Capture body = null)
         {
             var localVarPath = GetBasePath() + "payments/" + id + "/capture";
             var localVarPathParams = new Dictionary<String, String>();
@@ -422,8 +493,8 @@ namespace MerchantApi.Api
             }
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse)Configuration.ApiClient.CallApi(localVarPath,
-                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+           var localVarResponse = await Configuration.ApiClient.CallApi(localVarPath,
+                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
             int localVarStatusCode = (int)localVarResponse.StatusCode;
@@ -447,7 +518,7 @@ namespace MerchantApi.Api
         /// <param name="id">Id, required.</param>
         /// <param name="body">Refund Body, required.</param>
         /// <returns>ApiResponse of Refund</returns>
-        public Refund PaymentRefund(string id, Refund body = null)
+        public async Task<Refund> PaymentRefundAsync(string id, Refund body = null)
         {
             // verify the required parameter 'id' is set
             if (id == null)
@@ -456,7 +527,7 @@ namespace MerchantApi.Api
             if (body == null)
                 throw new ApiException(400, "Missing required parameter 'body' when calling PaymentsApi->PaymentRefund");
 
-            ApiResponse<Refund> localVarResponse = PaymentRefundWithHttpInfo(id, body);
+            ApiResponse<Refund> localVarResponse = await PaymentRefundWithHttpInfoAsync(id, body);
 
             return localVarResponse.Data;
         }
@@ -468,7 +539,7 @@ namespace MerchantApi.Api
         /// <param name="id">Id, required.</param>
         /// <param name="body">Refund Body, required.</param>
         /// <returns>ApiResponse of Refund</returns>
-        public ApiResponse<Refund> PaymentRefundWithHttpInfo(string id, Refund body = null)
+        public async Task<ApiResponse<Refund>> PaymentRefundWithHttpInfoAsync(string id, Refund body = null)
         {
             var localVarPath = GetBasePath() + "payments/" + id + "/refund";
             var localVarPathParams = new Dictionary<String, String>();
@@ -511,8 +582,8 @@ namespace MerchantApi.Api
             }
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse)Configuration.ApiClient.CallApi(localVarPath,
-                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+           var localVarResponse = await Configuration.ApiClient.CallApi(localVarPath,
+                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
             int localVarStatusCode = (int)localVarResponse.StatusCode;
@@ -535,13 +606,13 @@ namespace MerchantApi.Api
         /// <exception cref="MerchantApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">Id, required.</param>
         /// <returns>ApiResponse of Void</returns>
-        public Model.Void PaymentVoid(string id)
+        public async Task<Model.Void> PaymentVoidAsync(string id)
         {
             // verify the required parameter 'id' is set
             if (id == null)
                 throw new ApiException(400, "Missing required parameter 'id' when calling PaymentsApi->PaymentVoid");
 
-            ApiResponse<Model.Void> localVarResponse = PaymentVoidWithHttpInfo(id);
+            ApiResponse<Model.Void> localVarResponse = await PaymentVoidWithHttpInfoAsync(id);
             return localVarResponse.Data;
         }
 
@@ -551,7 +622,7 @@ namespace MerchantApi.Api
         /// <exception cref="MerchantApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">Id, required.</param>
         /// <returns>ApiResponse of Void</returns>
-        public ApiResponse<Model.Void> PaymentVoidWithHttpInfo(string id)
+        public async Task<ApiResponse<Model.Void>> PaymentVoidWithHttpInfoAsync(string id)
         {
             var localVarPath = GetBasePath() + "payments/" + id + "/void";
             var localVarPathParams = new Dictionary<String, String>();
@@ -582,8 +653,8 @@ namespace MerchantApi.Api
             }
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse)Configuration.ApiClient.CallApi(localVarPath,
-                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+           var localVarResponse = await Configuration.ApiClient.CallApi(localVarPath,
+                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
             int localVarStatusCode = (int)localVarResponse.StatusCode;
@@ -606,13 +677,13 @@ namespace MerchantApi.Api
         /// <exception cref="MerchantApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">Id, required.</param>
         /// <returns>Payment</returns>
-        public Payment PaymentGet(string id)
+        public async Task<Payment> PaymentGetAsync(string id)
         {
             // verify the required parameter 'id' is set
             if (id == null)
                 throw new ApiException(400, "Missing required parameter 'id' when calling PaymentApi->PaymentGet");
 
-            ApiResponse<Payment> localVarResponse = PaymentGetWithHttpInfo(id);
+            ApiResponse<Payment> localVarResponse = await PaymentGetWithHttpInfoAsync(id);
             return localVarResponse.Data;
         }
 
@@ -622,7 +693,7 @@ namespace MerchantApi.Api
         /// <exception cref="MerchantApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">Id, required.</param>
         /// <returns>ApiResponse of Payment</returns>
-        public ApiResponse<Payment> PaymentGetWithHttpInfo(string id)
+        public async Task<ApiResponse<Payment>> PaymentGetWithHttpInfoAsync(string id)
         {
             var localVarPath = GetBasePath() + "payments/" + id.ToString();
             var localVarPathParams = new Dictionary<String, String>();
@@ -658,8 +729,8 @@ namespace MerchantApi.Api
             }
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) Configuration.ApiClient.CallApi(localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = await Configuration.ApiClient.CallApi(localVarPath,
+                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
@@ -682,13 +753,13 @@ namespace MerchantApi.Api
         /// <exception cref="MerchantApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="token">Payment Token, required.</param>
         /// <returns>Payment</returns>
-        public Payment PaymentGetByToken(string token)
+        public async Task<Payment> PaymentGetByTokenAsync(string token)
         {
             // verify the required parameter 'token' is set
             if (token == null)
                 throw new ApiException(400, "Missing required parameter 'token' when calling PaymentApi->PaymentGetByToken");
 
-            ApiResponse<Payment> localVarResponse = PaymentGetByTokenWithHttpInfo(token);
+            ApiResponse<Payment> localVarResponse = await PaymentGetByTokenWithHttpInfoAsync(token);
             return localVarResponse.Data;
         }
 
@@ -698,7 +769,7 @@ namespace MerchantApi.Api
         /// <exception cref="MerchantApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="token">Payment Token, required.</param>
         /// <returns>ApiResponse of Payment</returns>
-        public ApiResponse<Payment> PaymentGetByTokenWithHttpInfo(string token)
+        public async Task<ApiResponse<Payment>> PaymentGetByTokenWithHttpInfoAsync(string token)
         {
             var localVarPath = GetBasePath() + "payments/token:" + token;
             var localVarPathParams = new Dictionary<String, String>();
@@ -729,8 +800,8 @@ namespace MerchantApi.Api
             }
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse)Configuration.ApiClient.CallApi(localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+           var localVarResponse = await Configuration.ApiClient.CallApi(localVarPath,
+                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
             int localVarStatusCode = (int)localVarResponse.StatusCode;
@@ -753,8 +824,8 @@ namespace MerchantApi.Api
         /// <exception cref="MerchantApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">Id, required.</param>
         /// <param name="body">ShippingCourier Body, required.</param>
-        /// <returns>IRestResponse</returns>
-        public IRestResponse PaymentUpdateShippingCourier(string id, ShippingCourier body = null)
+        /// <returns>RestResponse</returns>
+        public async Task<RestResponse> PaymentUpdateShippingCourierAsync(string id, ShippingCourier body = null)
         {
             // verify the required parameter 'id' is set
             if (id == null)
@@ -763,7 +834,7 @@ namespace MerchantApi.Api
             if (body == null)
                 throw new ApiException(400, "Missing required parameter 'body' when calling PaymentApi->PaymentUpdateShippingCourier");
 
-            var localVarResponse = PaymentUpdateShippingCourierWithHttpInfo(id, body);
+            var localVarResponse = await PaymentUpdateShippingCourierWithHttpInfoAsync(id, body);
             return localVarResponse;
         }
 
@@ -773,8 +844,8 @@ namespace MerchantApi.Api
         /// <exception cref="MerchantApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">Id, required.</param>
         /// <param name="body">ShippingCourier Body, required.</param>
-        /// <returns>IRestResponse</returns>
-        public IRestResponse PaymentUpdateShippingCourierWithHttpInfo(string id, ShippingCourier body = null)
+        /// <returns>RestResponse</returns>
+        public async Task<RestResponse> PaymentUpdateShippingCourierWithHttpInfoAsync(string id, ShippingCourier body = null)
         {
             var localVarPath = GetBasePath() + "payments/" + id + "/courier";
             var localVarPathParams = new Dictionary<String, String>();
@@ -817,8 +888,8 @@ namespace MerchantApi.Api
             }
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse)Configuration.ApiClient.CallApi(localVarPath,
-                Method.PUT, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            RestResponse localVarResponse = await Configuration.ApiClient.CallApi(localVarPath,
+                Method.Put, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
             int localVarStatusCode = (int)localVarResponse.StatusCode;
@@ -839,8 +910,8 @@ namespace MerchantApi.Api
         /// <exception cref="MerchantApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">Id, required.</param>
         /// <param name="body">MerchantReference Body, required.</param>
-        /// <returns>IRestResponse</returns>
-        public IRestResponse PaymentUpdateMerchantReference(string id, MerchantReference body = null)
+        /// <returns>RestResponse</returns>
+        public async Task<RestResponse> PaymentUpdateMerchantReferenceAsync(string id, MerchantReference body = null)
         {
             // verify the required parameter 'id' is set
             if (id == null)
@@ -849,7 +920,7 @@ namespace MerchantApi.Api
             if (body == null)
                 throw new ApiException(400, "Missing required parameter 'body' when calling PaymentApi->PaymentUpdateMerchantReference");
 
-            var localVarResponse = PaymentUpdateMerchantReferenceWithHttpInfo(id, body);
+            var localVarResponse = await PaymentUpdateMerchantReferenceWithHttpInfoAsync(id, body);
             return localVarResponse;
         }
 
@@ -859,8 +930,8 @@ namespace MerchantApi.Api
         /// <exception cref="MerchantApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">Id, required.</param>
         /// <param name="body">MerchantReference Body, required.</param>
-        /// <returns>IRestResponse</returns>
-        public IRestResponse PaymentUpdateMerchantReferenceWithHttpInfo(string id, MerchantReference body = null)
+        /// <returns>RestResponse</returns>
+        public async Task<RestResponse> PaymentUpdateMerchantReferenceWithHttpInfoAsync(string id, MerchantReference body = null)
         {
             var localVarPath = GetBasePath() + "payments/" + id;
             var localVarPathParams = new Dictionary<String, String>();
@@ -903,8 +974,8 @@ namespace MerchantApi.Api
             }
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse)Configuration.ApiClient.CallApi(localVarPath,
-                Method.PUT, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = await Configuration.ApiClient.CallApi(localVarPath,
+                Method.Put, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
             int localVarStatusCode = (int)localVarResponse.StatusCode;

@@ -37,12 +37,13 @@ namespace MerchantApi.Test
         [SetUp]
         public void Init()
         {
-            authorizationApi = new AuthorizationApi("https://api-sandbox.afterpay.com/v2/");
-            authorizationApi.Configuration.MerchantId = "MerchantId";
-            authorizationApi.Configuration.MerchantSecretKey = "MerchantSecretKey";
-            authorizationApi.Configuration.UserAgent = "Afterpay SDK; .netCore3.1; Test Payments Api";
+            string useragent = "nopCommerce v4.40 Afterpay Payment Plugin; .netCore6.0; Ip Address: 1.1.1.1; Merchant Id: 11111;";
+            authorizationApi = new AuthorizationApi("https://api-sandbox.afterpay.com/v2/", useragent);
+            authorizationApi.Configuration.MerchantId = "41819";
+            authorizationApi.Configuration.MerchantSecretKey = "97e7abb094337049f15b5daf1b273e56d09e8cbf9a2d21f50c28092de5590b3534a90448fc5dd8e633a906c6f7d55b86dedcbd69e7e1fe1029dc44385bfe696e";
+            authorizationApi.Configuration.UserAgent = "Afterpay SDK";
 
-            var response = authorizationApi.AuthorizationCreateToken();
+            var response = authorizationApi.AuthorizationCreateTokenAsync();
 
             instance = new PaymentsApi(authorizationApi.Configuration);
         }
@@ -77,13 +78,13 @@ namespace MerchantApi.Test
             string id = null;
             string token = null;
 
-            var authorization = authorizationApi.AuthorizationCreateToken();
+            var authorization = authorizationApi.AuthorizationCreateTokenAsync().Result;
 
             token = "001.u0hglki77ko70iuavgnb31vo2qq4ehold53brkdngfj9l73f";
 
-            var response = instance.PaymentGetByToken(token);
+            var response = instance.PaymentGetByTokenAsync(token).Result;
 
-            response = instance.PaymentGet(response.Id);
+            response = instance.PaymentGetAsync(response.Id).Result;
 
             System.Threading.Thread.Sleep(2000); // Give the system time to complete the creation of the order
 
@@ -100,11 +101,11 @@ namespace MerchantApi.Test
 
             string paymentToken = null;
 
-            var authorization = authorizationApi.AuthorizationCreateToken();
+            var authorization = authorizationApi.AuthorizationCreateTokenAsync().Result;
 
             paymentToken = "001.u0hglki77ko70iuavgnb31vo2qq4ehold53brkdngfj9l73f";
 
-            var response = instance.PaymentGetByToken(paymentToken);
+            var response = instance.PaymentGetByTokenAsync(paymentToken).Result;
 
             Assert.IsInstanceOf<Payment>(response, "response is Payment");
         }
@@ -118,17 +119,17 @@ namespace MerchantApi.Test
 
             string paymentToken = null;
 
-            var authorization = authorizationApi.AuthorizationCreateToken();
+            var authorization = authorizationApi.AuthorizationCreateTokenAsync().Result;
 
             paymentToken = "001.u0hglki77ko70iuavgnb31vo2qq4ehold53brkdngfj9l73f";
 
-            var response = instance.PaymentGetByToken(paymentToken);
+            var token = instance.PaymentGetByTokenAsync(paymentToken).Result;
 
             var courier = new ShippingCourier("2021-01-16T00:00:00Z", "CourierPost", "AA999999999AA", ShippingCourier.PriorityEnum.Standard.ToString());
 
-            instance.PaymentUpdateShippingCourier(response.Id, courier); 
+            var response = instance.PaymentUpdateShippingCourierAsync(token.Id, courier).Result;
 
-            response = instance.PaymentGetByToken(paymentToken);
+            token = instance.PaymentGetByTokenAsync(paymentToken).Result;
 
             Assert.IsInstanceOf<Payment>(response, "response is Payment");
 
@@ -143,17 +144,17 @@ namespace MerchantApi.Test
 
             string paymentToken = null;
 
-            var authorization = authorizationApi.AuthorizationCreateToken();
+            var authorization = authorizationApi.AuthorizationCreateTokenAsync().Result;
 
             paymentToken = "001.u0hglki77ko70iuavgnb31vo2qq4ehold53brkdngfj9l73f";
 
-            var response = instance.PaymentGetByToken(paymentToken);
+            var token = instance.PaymentGetByTokenAsync(paymentToken).Result;
 
             var reference = new MerchantReference("new_merchan_order_id_1234");
 
-            instance.PaymentUpdateMerchantReference(response.Id, reference);
+            var response = instance.PaymentUpdateMerchantReferenceAsync(token.Id, reference).Result;
 
-            response = instance.PaymentGetByToken(paymentToken);
+            token = instance.PaymentGetByTokenAsync(paymentToken).Result;
 
             Assert.IsInstanceOf<Payment>(response, "response is Payment");
 
@@ -168,13 +169,13 @@ namespace MerchantApi.Test
             // TODO uncomment below to test the method and replace null with proper value
             string orderToken = null;
 
-            var authorization = authorizationApi.AuthorizationCreateToken();
+            var authorization = authorizationApi.AuthorizationCreateTokenAsync().Result;
 
             orderToken = "001.u0hglki77ko70iuavgnb31vo2qq4ehold53brkdngfj9l73f";
 
             var capture = new CaptureFull(orderToken, "Capture for Order");
 
-            var captureResponse = instance.PaymentFullCapture(capture);
+            var captureResponse = instance.PaymentFullCaptureAsync(capture).Result;
 
             Assert.IsInstanceOf<Payment>(captureResponse, "response is Payment");
 
@@ -190,13 +191,13 @@ namespace MerchantApi.Test
 
             string orderToken = null;
 
-            var authorization = authorizationApi.AuthorizationCreateToken();
+            var authorization = authorizationApi.AuthorizationCreateTokenAsync().Result;
 
             orderToken = "001.u0hglki77ko70iuavgnb31vo2qq4ehold53brkdngfj9l73f";
 
             var auth = new Auth("1", orderToken, "Auth for Order");
 
-            var authResponse = instance.PaymentAuth(auth);
+            var authResponse = instance.PaymentAuthAsync(auth).Result;
 
             Assert.IsInstanceOf<Payment>(authResponse, "response is Payment");
 
@@ -210,7 +211,7 @@ namespace MerchantApi.Test
         {
             // TODO uncomment below to test the method and replace null with proper value
 
-            var authorization = authorizationApi.AuthorizationCreateToken();
+            var authorization = authorizationApi.AuthorizationCreateTokenAsync().Result;
 
             var amount = new Money("7.37", "NZD");
 
@@ -218,7 +219,7 @@ namespace MerchantApi.Test
 
             var id = "24693468";
 
-            var captureResponse = instance.PaymentCapture(id, capture);
+            var captureResponse = instance.PaymentCaptureAsync(id, capture);
 
             Assert.IsInstanceOf<Payment>(captureResponse, "response is Payment");
 
@@ -235,17 +236,17 @@ namespace MerchantApi.Test
 
             string paymentToken = null;
 
-            var authorization = authorizationApi.AuthorizationCreateToken();
+            var authorization = authorizationApi.AuthorizationCreateTokenAsync().Result;
 
             paymentToken = "001.d2hsgmp251rovl7i80ise05pe8ga1h0rh8b2ri4vvqla6hbf";
 
-            var response = instance.PaymentGetByToken(paymentToken);
+            var response = instance.PaymentGetByTokenAsync(paymentToken).Result;
 
             var refund = new Refund(response.Id, response.OriginalAmount, "Refund for Order", response.Id, "2021-01-16T00:00:00Z", response.Id);
 
-            var refundResponse = instance.PaymentRefund(response.Id, refund);
+            var refundResponse = instance.PaymentRefundAsync(response.Id, refund).Result;
 
-            response = instance.PaymentGetByToken(paymentToken);
+            response = instance.PaymentGetByTokenAsync(paymentToken).Result;
 
             Assert.IsInstanceOf<Payment>(response, "response is Payment");
 
@@ -259,11 +260,11 @@ namespace MerchantApi.Test
         {
             // TODO uncomment below to test the method and replace null with proper value
 
-            var authorization = authorizationApi.AuthorizationCreateToken();
+            var authorization = authorizationApi.AuthorizationCreateTokenAsync().Result;
 
             var id = "24693468";
 
-            var voidResponse = instance.PaymentVoid(id);
+            var voidResponse = instance.PaymentVoidAsync(id).Result;
 
             Assert.IsInstanceOf<Model.Void>(voidResponse, "response is Void");
 

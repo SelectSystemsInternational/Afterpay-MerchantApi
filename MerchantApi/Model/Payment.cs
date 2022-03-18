@@ -186,11 +186,10 @@ namespace MerchantApi.Model
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
-        /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class Charge {\n");
+            sb.Append("class Payment {\n");
             sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("  Token: ").Append(Token).Append("\n");
             sb.Append("  Status: ").Append(Status).Append("\n");
@@ -199,13 +198,21 @@ namespace MerchantApi.Model
             sb.Append("  OpenToCaptureAmount: ").Append(OpenToCaptureAmount).Append("\n");
             sb.Append("  PaymentState: ").Append(PaymentState).Append("\n");
             sb.Append("  MerchantReference: ").Append(MerchantReference).Append("\n");
-            sb.Append("  Refunds: ").Append(Refunds).Append("\n");
+            if (Refunds != null)
+            {
+                foreach (var r in Refunds)
+                    sb.Append("  Refund: ").Append(r.ToString()).Append("\n");
+            }
             sb.Append("  OrderDetails: ").Append(OrderDetails).Append("\n");
-            sb.Append("  Events: ").Append(Events).Append("\n");
+            if (Events != null)
+            {
+                foreach (var e in Events)
+                    sb.Append("  Event: ").Append(e.ToString()).Append("\n");
+            }
             sb.Append("}\n");
             return sb.ToString();
         }
-  
+
         /// <summary>
         /// Returns the JSON string presentation of the object
         /// </summary>

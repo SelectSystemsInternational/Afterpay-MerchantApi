@@ -13,7 +13,7 @@ using System.Reflection;
 
 [assembly: System.Reflection.AssemblyCompanyAttribute("MerchantApi")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
-[assembly: System.Reflection.AssemblyDescriptionAttribute("zipMoney MerchantApi C#")]
+[assembly: System.Reflection.AssemblyDescriptionAttribute("Afterpay MerchantApi C#")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("2.1.0.1")]
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("2.1.0.1")]
 [assembly: System.Reflection.AssemblyProductAttribute("MerchantApi")]

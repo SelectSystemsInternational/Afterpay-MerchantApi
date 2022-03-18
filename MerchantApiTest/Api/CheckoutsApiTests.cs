@@ -42,12 +42,13 @@ namespace MerchantApi.Test
         [SetUp]
         public void Init()
         {
-            authorizationApi = new AuthorizationApi("https://api-sandbox.afterpay.com/v2/");
-            authorizationApi.Configuration.MerchantId = "MerchantId";
-            authorizationApi.Configuration.MerchantSecretKey = "MerchantSecretKey";
-            authorizationApi.Configuration.UserAgent = "Afterpay SDK; .netCore3.1; Test Checkout Api";
+            string useragent = "nopCommerce v4.40 Afterpay Payment Plugin; .netCore6.0; Ip Address: 1.1.1.1; Merchant Id: 11111;";
+            authorizationApi = new AuthorizationApi("https://api-sandbox.afterpay.com/v2/", useragent);
+            authorizationApi.Configuration.MerchantId = "41819";
+            authorizationApi.Configuration.MerchantSecretKey = "97e7abb094337049f15b5daf1b273e56d09e8cbf9a2d21f50c28092de5590b3534a90448fc5dd8e633a906c6f7d55b86dedcbd69e7e1fe1029dc44385bfe696e";
+            authorizationApi.Configuration.UserAgent = "Afterpay SDK";
 
-            var response = authorizationApi.AuthorizationCreateToken();
+            var response = authorizationApi.AuthorizationCreateTokenAsync().Result;
 
             instance = new CheckoutsApi(authorizationApi.Configuration);
         }
@@ -134,9 +135,9 @@ namespace MerchantApi.Test
 
             var createCheckoutRequest = CreateCheckoutRequest();
 
-            var response = instance.CheckoutsCreate(createCheckoutRequest);
+            var response = instance.CheckoutsCreateAsync(createCheckoutRequest).Result;
 
-            var checkout = instance.CheckoutsGet(response.Token);
+            var checkout = instance.CheckoutsGetAsync(response.Token).Result;
 
             Assert.IsInstanceOf<Checkout> (response, "response is Checkout");
 

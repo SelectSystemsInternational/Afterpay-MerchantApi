@@ -137,7 +137,7 @@ namespace MerchantApi.Model
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class Refund {\n");
+            sb.Append("class PaymentEvent {\n");
             sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("  Created: ").Append(Created).Append("\n");
             sb.Append("  Expires: ").Append(Expires).Append("\n");

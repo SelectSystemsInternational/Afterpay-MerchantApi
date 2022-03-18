@@ -162,21 +162,29 @@ namespace MerchantApi.Model
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class Checkout {\n");
+            sb.Append("class OrderDetails {\n");
             sb.Append("  Amount: ").Append(Amount).Append("\n");
             sb.Append("  Consumer: ").Append(Consumer).Append("\n");
             sb.Append("  Billing: ").Append(Billing).Append("\n");
             sb.Append("  Shipping: ").Append(Shipping).Append("\n");
             sb.Append("  Courier: ").Append(Courier).Append("\n");
-            sb.Append("  Items: ").Append(Items).Append("\n");
-            sb.Append("  Discounts: ").Append(Discounts).Append("\n");
+            if (Items != null)
+            {
+                foreach (var i in Items)
+                    sb.Append("  Item: ").Append(i.ToString()).Append("\n");
+            }
+            if (Discounts != null)
+            {
+                foreach (var d in Discounts)
+                    sb.Append("  Discount: ").Append(d.ToString()).Append("\n");
+            }
             sb.Append("  Merchant: ").Append(Merchant).Append("\n");
             sb.Append("  TaxAmount: ").Append(TaxAmount).Append("\n");
             sb.Append("  ShippingAmount: ").Append(ShippingAmount).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
-  
+
         /// <summary>
         /// Returns the JSON string presentation of the object
         /// </summary>

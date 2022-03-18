@@ -22,4 +22,5 @@ M:\Production\GitRepos\AfterpayMerchantApi\MerchantApi\obj\Debug\netstandard2.1\
 M:\Production\GitRepos\AfterpayMerchantApi\MerchantApi\bin\Debug\netstandard2.1\MerchantApi.deps.json
 M:\Production\GitRepos\AfterpayMerchantApi\MerchantApi\bin\Debug\netstandard2.1\MerchantApi.dll
 M:\Production\GitRepos\AfterpayMerchantApi\MerchantApi\bin\Debug\netstandard2.1\MerchantApi.pdb
-M:\Production\GitRepos\AfterpayMerchantApi\MerchantApi\obj\Debug\netstandard2.1\MerchantApi.csprojAssemblyReference.cache
+M:\Production\GitRepos\AfterpayMerchantApi\MerchantApi\obj\Debug\netstandard2.1\MerchantApi.csproj.AssemblyReference.cache
+M:\Production\GitRepos\AfterpayMerchantApi\MerchantApi\obj\Debug\netstandard2.1\MerchantApi.GeneratedMSBuildEditorConfig.editorconfig

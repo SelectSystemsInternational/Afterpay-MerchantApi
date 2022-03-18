@@ -108,7 +108,7 @@ namespace MerchantApi.Model
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class OrderItem {\n");
+            sb.Append("class Item {\n");
             sb.Append("  Name: ").Append(Name).Append("\n");
             sb.Append("  Sku: ").Append(Sku).Append("\n");
             sb.Append("  Quantity: ").Append(Quantity).Append("\n");

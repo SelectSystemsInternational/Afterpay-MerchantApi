@@ -43,7 +43,7 @@ namespace MerchantApi.Model
         /// <param name="RefundId">The unique, Afterpay-generated refund ID.</param>
         /// <param name="RefundedAt">A UTC timestamp of the refund creation time, in ISO 8601 format.</param>
         /// <param name="RefundMerchantReference">A unique reference for the individual refund event. If provided, the value will appear in the daily settlement file as "Payment Event ID".</param>
-        public Capture(string RequestId = default(string), string MerchantReference = default(string), Money Amount = default(Money), string RefundMerchantReference = default(string))
+        public Capture(string RequestId = default(string), string MerchantReference = default(string), Money Amount = default(Money), string PaymentEventMerchantReference = default(string))
         {
             this.RequestId = RequestId;
             this.MerchantReference = MerchantReference;
@@ -79,7 +79,7 @@ namespace MerchantApi.Model
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class Refund {\n");
+            sb.Append("class Capture {\n");
             sb.Append("  RequestId: ").Append(RequestId).Append("\n");
             sb.Append("  Amount: ").Append(Amount).Append("\n");
             sb.Append("  MerchantReference: ").Append(MerchantReference).Append("\n");

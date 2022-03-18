@@ -40,21 +40,21 @@ namespace MerchantApi.Client
         /// <param name="userAgent">HTTP user agent</param>
         public Configuration(ApiClient apiClient = null,
                              Dictionary<String, String> defaultHeader = null,
-                             string MerchantId = null,
-                             string MerchantSecretKey = null,
+                             string merchantId = null,
+                             string merchantSecretKey = null,
                              String accessToken = null,
                              Dictionary<String, String> apiKey = null,
                              Dictionary<String, String> apiKeyPrefix = null,
                              string tempFolderPath = null,
                              string dateTimeFormat = null,
-                             int timeout = 86400,
-                             string userAgent = "Swagger-Codegen/1.0.0/csharp"
+                             int timeout = 1000,
+                             string userAgent = "Afterpay SDK" // "Afterpay SDK; .netCore6.0"
                             )
         {
             setApiClientUsingDefault(apiClient);
 
-            MerchantId = MerchantId;
-            MerchantSecretKey = MerchantSecretKey;
+            MerchantId = merchantId;
+            MerchantSecretKey = merchantSecretKey;
             AccessToken = accessToken;
             UserAgent = userAgent;
             Timeout = timeout;
@@ -68,7 +68,6 @@ namespace MerchantApi.Client
 
             TempFolderPath = tempFolderPath;
             DateTimeFormat = dateTimeFormat;
-            Timeout = timeout;
         }
 
         /// <summary>
@@ -107,16 +106,7 @@ namespace MerchantApi.Client
         /// Gets or sets the HTTP timeout (milliseconds) of ApiClient. Default to 100000 milliseconds.
         /// </summary>
         /// <value>Timeout.</value>
-        public int Timeout
-        {
-            get { return ApiClient.RestClient.Timeout; }
-
-            set
-            {
-                if (ApiClient != null)
-                    ApiClient.RestClient.Timeout = value;
-            }
-        }
+        public int Timeout;
 
         /// <summary>
         /// Gets or sets the default API client for making HTTP calls.

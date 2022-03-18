@@ -33,7 +33,7 @@ namespace MerchantApi.Test
     public class OrderDetailsTests
     {
         // TODO uncomment below to declare an instance variable for Refund
-        private Refund instance;
+        //private Refund instance;
 
         /// <summary>
         /// Setup before each test

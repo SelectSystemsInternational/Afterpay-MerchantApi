@@ -11,6 +11,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using RestSharp;
 using MerchantApi.Client;
 using MerchantApi.Model;
@@ -22,57 +23,39 @@ namespace MerchantApi.Api
     /// </summary>
     public interface ICheckoutsApi : IApiAccessor
     {
-        #region Synchronous Operations
 
         /// <summary>
-        /// Create a checkout
+        /// Create a checkout Creates a Afterpay checkout.  
         /// </summary>
-        /// <remarks>
-        /// Creates a Afterpay checkout.
-        /// </remarks>
         /// <exception cref="MerchantApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body"> (optional)</param>
         /// <returns>Checkout</returns>
-        Checkout CheckoutsCreate(OrderDetails body = null);
+        public Task<Checkout> CheckoutsCreateAsync(OrderDetails body = null);
 
         /// <summary>
-        /// Retrieve a checkout
+        /// Create a checkout Creates a Afterpay checkout.
         /// </summary>
-        /// <remarks>
-        /// Retrieves a previously created checkout by id.
-        /// </remarks>
+        /// <exception cref="MerchantApi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="body"> (optional)</param>
+        /// <returns>ApiResponse of Checkout</returns>
+        public Task<ApiResponse<Checkout>> CheckoutsCreateWithHttpInfoAsync(OrderDetails body = null);
+
+        /// <summary>
+        /// Retrieve a checkout Retrieves a previously created checkout by id.
+        /// </summary>
         /// <exception cref="MerchantApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id"></param>
         /// <returns>Checkout</returns>
-        Checkout CheckoutsGet(string id);
-
-        #endregion Synchronous Operations
-
-        #region Asynchronous Operations
+        public Task<Checkout> CheckoutsGetAsync(string id);
 
         /// <summary>
-        /// Create a checkout
+        /// Retrieve a checkout Retrieves a previously created checkout by id.
         /// </summary>
-        /// <remarks>
-        /// Creates a Afterpay checkout.
-        /// </remarks>
-        /// <exception cref="MerchantApi.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="body"> (optional)</param>
-        /// <returns>Task of Checkout</returns>
-        System.Threading.Tasks.Task<Checkout> CheckoutsCreateAsync(OrderDetails body = null);
-
-        /// <summary>
-        /// Retrieve a checkout
-        /// </summary>
-        /// <remarks>
-        /// Retrieves a previously created checkout by id.
-        /// </remarks>
         /// <exception cref="MerchantApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id"></param>
-        /// <returns>Task of Checkout</returns>
-        System.Threading.Tasks.Task<Checkout> CheckoutsGetAsync(string id);
+        /// <returns>ApiResponse of Checkout</returns>
+        public Task<ApiResponse<Checkout>> CheckoutsGetWithHttpInfoAsync(string id);
 
-        #endregion Asynchronous Operations
     }
 
     /// <summary>
@@ -81,7 +64,13 @@ namespace MerchantApi.Api
     public partial class CheckoutsApi : ICheckoutsApi
     {
 
-        private MerchantApi.Client.ExceptionFactory _exceptionFactory = (name, response) => null;
+        private ExceptionFactory _exceptionFactory = (name, response) => null;
+
+        /// <summary>
+        /// Gets or sets the configuration object
+        /// </summary>
+        /// <value>An instance of the Configuration</value>
+        public Configuration Configuration { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CheckoutsApi"/> class.
@@ -123,24 +112,9 @@ namespace MerchantApi.Api
         }
 
         /// <summary>
-        /// Gets the base path of the API client.
-        /// </summary>
-        /// <value>The base path</value>
-        public String GetBasePath()
-        {
-            return this.Configuration.ApiClient.RestClient.BaseUrl.ToString();
-        }
-
-        /// <summary>
-        /// Gets or sets the configuration object
-        /// </summary>
-        /// <value>An instance of the Configuration</value>
-        public Configuration Configuration {get; set;}
-
-        /// <summary>
         /// Provides a factory method hook for the creation of exceptions.
         /// </summary>
-        public MerchantApi.Client.ExceptionFactory ExceptionFactory
+        public ExceptionFactory ExceptionFactory
         {
             get
             {
@@ -159,9 +133,9 @@ namespace MerchantApi.Api
         /// <exception cref="MerchantApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body"> (optional)</param>
         /// <returns>Checkout</returns>
-        public Checkout CheckoutsCreate(OrderDetails body = null)
+        public async Task<Checkout> CheckoutsCreateAsync(OrderDetails body = null)
         {
-            ApiResponse<Checkout> localVarResponse = CheckoutsCreateWithHttpInfo(body);
+            ApiResponse<Checkout> localVarResponse = await CheckoutsCreateWithHttpInfoAsync(body);
             return localVarResponse.Data;
         }
 
@@ -171,7 +145,7 @@ namespace MerchantApi.Api
         /// <exception cref="MerchantApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body"> (optional)</param>
         /// <returns>ApiResponse of Checkout</returns>
-        public ApiResponse<Checkout> CheckoutsCreateWithHttpInfo(OrderDetails body = null)
+        public async Task<ApiResponse<Checkout>> CheckoutsCreateWithHttpInfoAsync(OrderDetails body = null)
         {
 
             var localVarPath = "/checkouts";
@@ -215,88 +189,8 @@ namespace MerchantApi.Api
             }
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) Configuration.ApiClient.CallApi(localVarPath,
-                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("CheckoutsCreate", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return new ApiResponse<Checkout>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (Checkout) Configuration.ApiClient.Deserialize(localVarResponse, typeof(Checkout)));
-            
-        }
-
-        /// <summary>
-        /// Create a checkout Creates a Afterpay checkout.
-        /// </summary>
-        /// <exception cref="MerchantApi.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="body"> (optional)</param>
-        /// <returns>Task of Checkout</returns>
-        public async System.Threading.Tasks.Task<Checkout> CheckoutsCreateAsync(OrderDetails body = null)
-        {
-             ApiResponse<Checkout> localVarResponse = await CheckoutsCreateAsyncWithHttpInfo(body);
-             return localVarResponse.Data;
-        }
-
-        /// <summary>
-        /// Create a checkout Creates a Afterpay checkout.
-        /// </summary>
-        /// <exception cref="MerchantApi.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="body"> (optional)</param>
-        /// <returns>Task of ApiResponse (Checkout)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Checkout>> CheckoutsCreateAsyncWithHttpInfo(OrderDetails body = null)
-        {
-            var localVarPath = "/checkouts";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new Dictionary<String, String>();
-            var localVarHeaderParams = new Dictionary<String, String>(Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-                "application/json"
-            };
-            String localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "*/*"
-            };
-
-            String localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null)
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-            // set "format" to json by default
-            // e.g. /pet/{petId}.{format} becomes /pet/{petId}.json
-            localVarPathParams.Add("format", "json");
-            if (body != null && body.GetType() != typeof(byte[]))
-            {
-                localVarPostBody = Configuration.ApiClient.Serialize(body); // http body (model) parameter
-            }
-            else
-            {
-                localVarPostBody = body; // byte array
-            }
-
-            // authentication (Authorization) required
-            if (!String.IsNullOrEmpty(Configuration.GetApiKeyWithPrefix("Authorization")))
-            {
-                localVarHeaderParams["Authorization"] = Configuration.GetApiKeyWithPrefix("Authorization");
-            }
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) await Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = await Configuration.ApiClient.CallApi(localVarPath,
+                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
@@ -319,9 +213,9 @@ namespace MerchantApi.Api
         /// <exception cref="MerchantApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id"></param>
         /// <returns>Checkout</returns>
-        public Checkout CheckoutsGet(string id)
+        public async Task<Checkout> CheckoutsGetAsync(string id)
         {
-             ApiResponse<Checkout> localVarResponse = CheckoutsGetWithHttpInfo(id);
+             ApiResponse<Checkout> localVarResponse = await CheckoutsGetWithHttpInfoAsync(id);
              return localVarResponse.Data;
         }
 
@@ -331,7 +225,7 @@ namespace MerchantApi.Api
         /// <exception cref="MerchantApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id"></param>
         /// <returns>ApiResponse of Checkout</returns>
-        public ApiResponse<Checkout> CheckoutsGetWithHttpInfo (string id)
+        public async Task<ApiResponse<Checkout>> CheckoutsGetWithHttpInfoAsync(string id)
         {
             // verify the required parameter 'id' is set
             if (id == null)
@@ -373,84 +267,8 @@ namespace MerchantApi.Api
             }
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) Configuration.ApiClient.CallApi(localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("CheckoutsGet", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return new ApiResponse<Checkout>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (Checkout) Configuration.ApiClient.Deserialize(localVarResponse, typeof(Checkout)));
-            
-        }
-
-        /// <summary>
-        /// Retrieve a checkout Retrieves a previously created checkout by id.
-        /// </summary>
-        /// <exception cref="MerchantApi.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="id"></param>
-        /// <returns>Task of Checkout</returns>
-        public async System.Threading.Tasks.Task<Checkout> CheckoutsGetAsync(string id)
-        {
-             ApiResponse<Checkout> localVarResponse = await CheckoutsGetAsyncWithHttpInfo(id);
-             return localVarResponse.Data;
-        }
-
-        /// <summary>
-        /// Retrieve a checkout Retrieves a previously created checkout by id.
-        /// </summary>
-        /// <exception cref="MerchantApi.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="id"></param>
-        /// <returns>Task of ApiResponse (Checkout)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Checkout>> CheckoutsGetAsyncWithHttpInfo (string id)
-        {
-            // verify the required parameter 'id' is set
-            if (id == null)
-                throw new ApiException(400, "Missing required parameter 'id' when calling CheckoutsApi->CheckoutsGet");
-
-            var localVarPath = "/checkouts/{id}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new Dictionary<String, String>();
-            var localVarHeaderParams = new Dictionary<String, String>(Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-                "application/json"
-            };
-            String localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-            String localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null)
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-            // set "format" to json by default
-            // e.g. /pet/{petId}.{format} becomes /pet/{petId}.json
-            localVarPathParams.Add("format", "json");
-            if (id != null) localVarPathParams.Add("id", Configuration.ApiClient.ParameterToString(id)); // path parameter
-
-            // authentication (Authorization) required
-            if (!String.IsNullOrEmpty(Configuration.GetApiKeyWithPrefix("Authorization")))
-            {
-                localVarHeaderParams["Authorization"] = Configuration.GetApiKeyWithPrefix("Authorization");
-            }
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) await Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = await Configuration.ApiClient.CallApi(localVarPath,
+                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
